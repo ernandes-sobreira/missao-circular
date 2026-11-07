@@ -16,7 +16,7 @@ A cidade começa com **50 pontos**. O valor é um **indicador didático**, não 
 
 ## Experiência
 
-- Ilustrações vetoriais diferentes para cada uma das 42 situações nos quatro níveis, representando mercados, reparo, coleta seletiva, recursos naturais, indicadores e fluxos de materiais.
+- Cenas temáticas para as 42 situações nos quatro níveis, com imagens fotográficas tratadas com luz, cor e movimentos suaves, em uma direção visual semirrealista. Ilustrações vetoriais permanecem como alternativa caso alguma imagem não carregue.
 - A ilustração acompanha o assunto da pergunta, enquanto o índice ambiental acompanha o resultado acumulado das decisões. Não há casas representadas em APP nem paisagem urbana de grandes prédios.
 - Feedback educacional imediato e mensagens que traduzem consequências das decisões.
 - Quatro dificuldades com situações diferentes.
@@ -44,3 +44,19 @@ O repositório ainda não contém uma licença de código aberta específica. So
 ---
 
 *Jogar é explorar escolhas. Aprender é entender suas consequências.*
+
+## Créditos das imagens
+
+As fotografias apresentadas nas cenas vêm do [Pexels](https://www.pexels.com/license/) e são usadas como elementos visuais temáticos, com tratamento de cor e movimento. As imagens originais pertencem aos respectivos autores. Créditos exibidos também nas cenas:
+
+- Mike Jones — feira e compras ([foto](https://www.pexels.com/photo/woman-in-brown-blouse-buying-fresh-fruits-on-a-stall-8805197/))
+- Maël BALLAND — reabastecimento de garrafa ([foto](https://www.pexels.com/photo/holding-white-tumbler-3195787/))
+- Tima Miroshnichenko — reparos e eletrônicos ([foto](https://www.pexels.com/photo/a-person-repairing-a-smartphone-6754839/))
+- Rachel Claire — roupas e alimentos ([foto](https://www.pexels.com/photo/clothes-hanged-on-a-clothes-rack-5490974/))
+- MADEINEGYPT.CA — embalagem sustentável ([foto](https://www.pexels.com/photo/package-inside-a-box-10418015/))
+- Henry Acevedo — lixeiras e reciclagem ([foto](https://www.pexels.com/photo/colorful-recycling-bins-outdoors-in-sunny-park-32229899/))
+- Allan Carvalho — bicicleta em estrada rural ([foto](https://www.pexels.com/photo/road-bicycle-on-road-20093339/))
+- Kampus Production — caixas e embalagens ([foto](https://www.pexels.com/photo/close-up-of-person-packing-an-order-into-a-cardboard-box-7857523/))
+- Sinan KRIYA — processos de reciclagem ([foto](https://www.pexels.com/photo/woman-working-in-industrial-recycling-facility-39839936/))
+- Artem Podrez — gráficos e indicadores ([foto](https://www.pexels.com/photo/a-person-writing-on-a-paper-with-graph-6779570/))
+- Greta Hoffman — consumo e produtos ([foto](https://www.pexels.com/photo/woman-buying-groceries-in-a-supermarket-9475239/))
