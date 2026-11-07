@@ -232,6 +232,20 @@ header.top .sub{font-size:clamp(1.08rem,1.7vw,1.3rem);line-height:1.45}
 @media(max-width:550px){#sceneArt{height:195px}}
 @media(prefers-reduced-motion:reduce){.scene-cloud,.art-move,.art-line,.art-cycle{animation:none!important}}
 
+
+/* Fotografias tratadas com paleta natural e animação de câmera muito suave. */
+#sceneArt{position:relative;isolation:isolate;background:#d5e3d3;min-height:210px}
+#sceneArt .scene-svg{position:relative;z-index:0;filter:contrast(1.04) saturate(.85)}
+#sceneArt .scene-real-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;filter:saturate(.91) contrast(1.07) sepia(.075) brightness(.9);animation:sceneKenBurns 13s ease-in-out infinite alternate;transform:scale(1.015)}
+#sceneArt:has(.scene-real-photo):after{content:"";position:absolute;z-index:2;inset:0;pointer-events:none;background:linear-gradient(90deg,rgba(9,41,34,.45),transparent 56%),linear-gradient(0deg,rgba(3,29,26,.48),transparent 42%);box-shadow:inset 0 0 30px #172e2530}
+#sceneArt .scene-photo-caption{position:absolute;z-index:3;left:20px;bottom:19px;max-width:75%;color:#fff;text-shadow:0 2px 8px #001f1de0;display:flex;flex-direction:column;gap:3px}
+#sceneArt .scene-photo-caption strong{font-size:clamp(1.12rem,2vw,1.45rem);font-weight:850}
+#sceneArt .scene-photo-caption span{font-size:.9rem;opacity:.96}
+#sceneArt .scene-credit{position:absolute;z-index:3;right:12px;bottom:8px;color:#fff;font-size:.6rem;text-shadow:0 1px 5px #000}
+#sceneArt.photo-fallback .scene-photo-caption,#sceneArt.photo-fallback .scene-credit{display:none}
+@keyframes sceneKenBurns{from{transform:scale(1.01) translateX(-.7%)}to{transform:scale(1.085) translateX(.7%)}}
+@media(prefers-reduced-motion:reduce){#sceneArt .scene-real-photo{animation:none!important;transform:none!important}}
+
 </style>
 </head>
 <body>
@@ -671,6 +685,18 @@ grafico:'<path d="M160 91v195h340" fill="none" stroke="#758b81" stroke-width="10
 globo:'<circle cx="320" cy="190" r="122" fill="#83c4d4" stroke="#4c9b9c" stroke-width="9"/><path d="M252 102l50 8 27 46 -42 27 -10 47 -49 -25 -17 -47zM358 184l56 -27 29 37 -34 39 -4 42 -55 9 -20 -54z" fill="#8bb477"/><path d="M198 190h244M217 135h206M222 251h194" stroke="#e6f8ef" stroke-width="6" opacity=".55" fill="none"/>',
 fabrica:'<path d="M130 288V150l100 50v-50l100 50v-92h145v180z" fill="#9cb6ad" stroke="#647d77" stroke-width="8"/><rect x="383" y="63" width="45" height="65" fill="#728b8e"/><g fill="#d8e8da"><rect x="171" y="229" width="39" height="40"/><rect x="258" y="229" width="39" height="40"/><rect x="356" y="229" width="39" height="40"/></g><path class="art-move" d="M404 60q-17 -21 0 -43" fill="none" stroke="#d6e4de" stroke-width="10"/>'
 };
+
+/* Cenas com tratamento semirrealista; arte SVG fica de fallback. */
+const artPhotos={
+ feira:[8805197,"Mike Jones"], agua:[3195787,"Maël BALLAND"],
+ eletronico:[6754839,"Tima Miroshnichenko"], alimento:[4997810,"Rachel Claire"],
+ roupa:[5490974,"Rachel Claire"], embalagem:[10418015,"MADEINEGYPT.CA"],
+ lixeiras:[32229899,"Henry Acevedo"], bicicleta:[20093339,"Allan Carvalho"],
+ reparo:[6755092,"Tima Miroshnichenko"], caixa:[7857523,"Kampus Production"],
+ ciclo:[39839936,"Sinan KRIYA"], composta:[6509137,"Tima Miroshnichenko"],
+ selo:[9475239,"Greta Hoffman"], grafico:[6779570,"Artem Podrez"],
+ globo:[20093339,"Allan Carvalho"], fabrica:[39839936,"Sinan KRIYA"]
+};
 function renderSceneArt(){
  const target=document.getElementById("sceneArt");if(!target)return;
  const config=artMeta[level] && artMeta[level][idx] || ["ciclo","Economia circular","Decisões"];
@@ -685,6 +711,24 @@ function renderSceneArt(){
  +'<rect x="14" y="12" width="340" height="63" rx="12" fill="#fff" opacity=".96"/>'
  +'<text x="29" y="39" font-size="20" font-weight="800" font-family="system-ui,sans-serif" fill="#205743">'+esc(title)+'</text>'
  +'<text x="29" y="60" font-size="14" font-family="system-ui,sans-serif" fill="#487966">'+esc(tip)+'</text></svg>';
+
+ const photo=artPhotos[kind];
+ if(photo){
+   const img=document.createElement("img");
+   img.className="scene-real-photo";
+   img.alt="Cena semirrealista de "+title+".";
+   img.decoding="async";img.loading="eager";
+   img.src="https://images.pexels.com/photos/"+photo[0]+"/pexels-photo-"+photo[0]+".jpeg?auto=compress&cs=tinysrgb&w=1100";
+   img.onerror=()=>{img.remove();target.classList.add("photo-fallback")};
+   img.onload=()=>target.classList.remove("photo-fallback");
+   const wrap=document.createElement("div");wrap.className="scene-photo-caption";
+   const header=document.createElement("strong"),sub=document.createElement("span");
+   header.textContent=title;sub.textContent=tip;wrap.append(header,sub);
+   const credit=document.createElement("small");credit.className="scene-credit";
+   credit.textContent="Foto: "+photo[1]+" / Pexels";
+   target.append(img,wrap,credit);
+ }
+
 }
 
 function renderScene(){
