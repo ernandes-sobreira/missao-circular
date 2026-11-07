@@ -199,6 +199,25 @@ header.top .sub{font-size:clamp(1.08rem,1.7vw,1.3rem);line-height:1.45}
   transform-box:view-box;
 }
 
+
+/* Devolutiva personalizada por decisão, sem textos genéricos */
+.diagnosis{margin:20px 0 22px;text-align:left;border-top:1px solid #c9e3d3;padding-top:20px}
+.diagnosis h3{margin:0 0 14px;font-size:clamp(1.2rem,2.6vw,1.45rem);color:#173d2a}
+.diagnosis-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.diagnosis-panel{border:1px solid #cee9d8;border-radius:17px;background:#f0faf3;padding:17px;color:#1a4030}
+.diagnosis-panel.improve-panel{background:#fff9e8;border-color:#efe3bc}
+.diagnosis-panel h4{margin:0 0 8px;font-size:1rem;line-height:1.45}
+.diagnosis-count{font-size:.87rem;color:#51705d;margin:0 0 10px}
+.diagnosis-panel ul{margin:0;padding-left:20px}
+.diagnosis-panel li{margin-bottom:13px;line-height:1.4;font-size:.91rem}
+.diagnosis-panel li:last-child{margin-bottom:0}
+.diag-context{display:block;color:#586e60;font-size:.79rem;margin-bottom:4px}
+.diag-action{display:block;font-weight:700}
+.diag-chosen{display:block;color:#846646;font-size:.84rem;margin-top:5px}
+.diagnosis-panel strong{color:#276548}
+.diagnosis-foot{font-size:.77rem;color:#63766a;line-height:1.45;margin:12px 0 0}
+@media(max-width:720px){.diagnosis-grid{grid-template-columns:1fr}}
+
 </style>
 </head>
 <body>
@@ -289,6 +308,20 @@ header.top .sub{font-size:clamp(1.08rem,1.7vw,1.3rem);line-height:1.45}
       <h2>Fim da missão!</h2>
       <div class="verdict" id="finVerdict"></div>
       <div class="resume" id="finResume"></div>
+      <section class="diagnosis" id="diagnosis" aria-labelledby="diagTitle">
+        <h3 id="diagTitle">🌱 Suas escolhas, seu impacto</h3>
+        <div class="diagnosis-grid">
+          <div class="diagnosis-panel good-panel">
+            <h4>✅ Você agiu de forma sustentável em...</h4>
+            <div id="diagStrength"></div>
+          </div>
+          <div class="diagnosis-panel improve-panel">
+            <h4>🌿 Você pode melhorar em...</h4>
+            <div id="diagImprove"></div>
+          </div>
+        </div>
+        <p class="diagnosis-foot">Este retorno considera as decisões desta partida. O índice é didático, não uma medida ambiental real.</p>
+      </section>
       <div class="namerow">
         <input id="nameIn" maxlength="20" placeholder="Seu nome (até 20 caracteres)">
         <button class="saveBtn" id="saveBtn">Salvar no ranking</button>
@@ -563,6 +596,7 @@ const DATA = {
 let level = "basico";
 let scenes = [];
 let idx = 0, health = 50, good = 0, answered = false;
+let decisionHistory = [];
 let startTime = 0, timer = null, elapsed = 0;
 
 const $ = id => document.getElementById(id);
@@ -595,6 +629,7 @@ function setLevel(l){
 function reset(){
   scenes = DATA[level].scenes;
   idx = 0; health = 50; good = 0; answered = false;
+  decisionHistory = [];
   $("final").classList.remove("show");
   $("play").style.display = "";
   $("saveMsg").textContent = "";
@@ -658,6 +693,7 @@ function choose(i, btn){
   else if(o.q===1){ delta = 0; }
   else { delta = -V; }
   health = Math.max(0, Math.min(100, health + delta));
+  decisionHistory.push({scene:sc.q, chosen:o.t, quality:o.q, explanation:o.fb, recommended:sc.o.find(item=>item.q===2)?.t||""});
 
   document.querySelectorAll(".opt").forEach(b=>{
     b.disabled = true;
@@ -680,6 +716,22 @@ $("next").onclick = ()=>{
   else finish();
 };
 
+function buildDiagnosis(){
+  const positive=decisionHistory.filter(d=>d.quality===2);
+  const improve=decisionHistory.filter(d=>d.quality<2);
+  const displayItem=d=>{
+    const selected=d.quality===2?"":'<span class="diag-chosen">Você escolheu: '+esc(d.chosen)+'</span>';
+    const tip=d.recommended?' <strong>Experimente: '+esc(d.recommended)+'.</strong>':"";
+    return '<li><span class="diag-context">'+esc(d.scene)+'</span><span class="diag-action">'+esc(d.quality===2?d.chosen:d.explanation)+'</span>'+selected+(d.quality<2?tip:"")+'</li>';
+  };
+  $("diagStrength").innerHTML=positive.length
+    ? '<p class="diagnosis-count">'+positive.length+' de '+decisionHistory.length+' escolhas mais sustentáveis</p><ul>'+positive.map(displayItem).join("")+'</ul>'
+    : '<p>Você ainda não escolheu a alternativa mais sustentável. Na próxima tentativa, procure opções que reduzam o desperdício e mantenham materiais em uso.</p>';
+  $("diagImprove").innerHTML=improve.length
+    ? '<p class="diagnosis-count">'+improve.length+' oportunidade'+(improve.length===1?"":"s")+' de melhoria</p><ul>'+improve.map(displayItem).join("")+'</ul>'
+    : '<p>Excelente! Você selecionou a opção mais sustentável em todas as situações deste nível. O próximo desafio é aplicar essas escolhas no cotidiano.</p>';
+}
+
 function finish(){
   stopTimer();
   $("prog").style.width = "100%";
@@ -692,6 +744,7 @@ function finish(){
   $("finEmoji").textContent = emoji;
   $("finVerdict").textContent = verdict;
   $("finResume").innerHTML = "Índice final: <b>"+score+"%</b> · Boas escolhas: <b>"+good+"/"+scenes.length+"</b> · Tempo: <b>"+elapsed+"s</b>";
+  buildDiagnosis();
   $("play").style.display = "none";
   $("final").classList.add("show");
 }
