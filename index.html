@@ -156,22 +156,89 @@ footer .meta{font-size:.8rem;color:#bee5d1}
 @media(max-width:550px){body{padding:14px 8px 22px}.wrap{width:100%}.card{padding:18px 15px}.hud{grid-template-columns:repeat(2,1fr)}.pill{padding:12px 5px}.city-scene{height:180px}.opt{min-height:60px}}
 @media(prefers-reduced-motion:reduce){body:before,.cloud,.city-tree,.city-scene:before{animation:none!important}.city-box,.city-life span,.ecofill{transition:none!important}}
 
+
+/* Paisagem de comunidade do interior: sem edifícios altos ou skyline urbano */
+header.top{grid-template-columns:minmax(0,1fr) minmax(310px,480px);gap:22px}
+header.top h1{font-size:clamp(2.35rem,4.7vw,4.25rem)}
+header.top .sub{font-size:clamp(1.08rem,1.7vw,1.3rem);line-height:1.45}
+.hero-copy .eyebrow{margin-bottom:12px}
+.city-box{background:rgba(8,59,47,.75)}
+.city-scene{height:240px;background:#8bcdd5}
+.landscape{display:block;width:100%;height:100%}
+.land-sun{filter:drop-shadow(0 0 13px #fff3b5);animation:sunBreathe 5s ease-in-out infinite alternate;transform-origin:530px 62px}
+.land-cloud-a{animation:cloudMove 13s ease-in-out infinite alternate}
+.land-cloud-b{animation:cloudMove 18s ease-in-out infinite alternate-reverse}
+.tree-sway{animation:treeSway 4.8s ease-in-out infinite alternate;transform-origin:60px 260px}
+.tree-sway.alternate{animation-delay:-2s}
+.water-glimmer{animation:riverGlow 3.4s linear infinite alternate}
+.canoe{animation:canoeFloat 6s ease-in-out infinite alternate}
+.birds{animation:birdFly 16s linear infinite}
+@keyframes riverGlow{from{opacity:.24;transform:translateX(-10px)}to{opacity:.85;transform:translateX(14px)}}
+@keyframes canoeFloat{from{transform:translate(-13px,0)}to{transform:translate(10px,-3px)}}
+@keyframes birdFly{from{transform:translateX(-60px)}to{transform:translateX(170px)}}
+.city-box.state-low .city-scene{background:#b6a995}
+.city-box.state-low .landscape{filter:saturate(.55) sepia(.25)}
+.city-box.state-low .city-fog{opacity:.38;background:linear-gradient(180deg,#87766644,#644c4244)}
+.city-box.state-high .landscape{filter:saturate(1.22) brightness(1.05)}
+.city-box.state-mid .landscape{filter:saturate(1)}
+.city-box .landscape{transition:filter 1s ease}
+.howto{padding:12px 15px;font-size:1.03rem;line-height:1.5;background:#e3f4e9;color:#143c2d}
+.card .scene{color:#112f25!important;font-weight:850;line-height:1.4;opacity:1!important}
+.card .scene::first-line{color:#12382b}
+.card .opt{color:#173c2d}
+@media(max-width:800px){header.top{grid-template-columns:1fr}.city-box{max-width:580px}}
+@media(max-width:550px){.city-scene{height:215px}header.top h1{font-size:2.6rem}.howto{font-size:.98rem}}
+@media(prefers-reduced-motion:reduce){.land-sun,.land-cloud,.tree-sway,.water-glimmer,.canoe,.birds{animation:none!important}}
+
 </style>
 </head>
 <body>
 <div class="wrap">
   <header class="top">
     <div class="hero-copy">
-      <div class="eyebrow">♻️ CIDADE · DECISÕES · FUTURO</div>
-      <h1>Missão <span>Circular</span></h1>
-      <p class="sub">Suas decisões transformam a cidade. Escolha, descubra as consequências e veja a natureza reagir.</p>
-      <p class="hero-support">Reutilize, repare, reduza desperdícios e ajude o ecossistema a florescer. Cada escolha faz diferença.</p>
+      <div class="eyebrow">♻️ MISSÃO CIRCULAR</div>
+      <h1>Escolha melhor.<br><span>Faça a diferença.</span></h1>
+      <p class="sub"><strong>Escolha a melhor opção em cada situação.</strong><br>Suas decisões ajudam a natureza a se recuperar.</p>
     </div>
     <div class="city-box state-mid" id="cityBox">
-      <div class="city-caption"><span id="cityMood">🌱 Cidade em equilíbrio</span><strong id="cityPct">50%</strong></div>
-      <div class="city-scene" role="img" aria-label="Ilustração animada de cidade cuja aparência muda com o índice ambiental">
-        <div class="cloud"></div><div class="buildings"><span class="building"></span><span class="building"></span><span class="building"></span><span class="building"></span><span class="building"></span><span class="building"></span></div>
-        <div class="city-ground"></div><span class="city-tree t1"></span><span class="city-tree t2"></span><span class="city-tree t3"></span><span class="city-tree t4"></span><div class="city-fog"></div>
+      <div class="city-caption"><span id="cityMood">🌱 Natureza em equilíbrio</span><strong id="cityPct">50%</strong></div>
+      <div class="city-scene" role="img" aria-label="Paisagem animada inspirada no Pantanal: rio, árvores, casas baixas, aves e canoa. Sua aparência reage às escolhas do jogador.">
+        <svg class="landscape" viewBox="0 0 640 320" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <defs>
+            <linearGradient id="mcSky" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#7fc6df"/><stop offset=".9" stop-color="#ecf6d3"/></linearGradient>
+            <linearGradient id="mcRiver" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#78c8c7"/><stop offset="1" stop-color="#176d87"/></linearGradient>
+            <linearGradient id="mcLand" x1="0" x2="0" y1="0" y2="1"><stop stop-color="#88af65"/><stop offset="1" stop-color="#337d4b"/></linearGradient>
+          </defs>
+          <rect width="640" height="320" fill="url(#mcSky)"/>
+          <circle class="land-sun" cx="530" cy="62" r="29" fill="#fff2b5"/>
+          <g class="land-cloud land-cloud-a" fill="#fff" opacity=".85"><ellipse cx="110" cy="66" rx="45" ry="16"/><ellipse cx="91" cy="56" rx="26" ry="20"/><ellipse cx="135" cy="55" rx="29" ry="20"/></g>
+          <g class="land-cloud land-cloud-b" fill="#fff" opacity=".74"><ellipse cx="385" cy="88" rx="49" ry="13"/><ellipse cx="369" cy="78" rx="26" ry="20"/><ellipse cx="401" cy="77" rx="28" ry="18"/></g>
+          <path d="M0 164 Q105 134 203 161 T428 150 T640 164 L640 320 H0Z" fill="#72a083"/>
+          <path d="M0 190 Q120 159 242 182 T485 175 T640 180 V320 H0Z" fill="url(#mcLand)"/>
+          <path d="M0 224 Q160 193 285 227 Q380 250 480 227 T640 212 V320 H0Z" fill="#458a57"/>
+          <path class="river" d="M252 219 Q342 208 393 234 Q461 255 640 246 V320 H175 Q250 278 252 219Z" fill="url(#mcRiver)"/>
+          <g class="water-glimmer" fill="none" stroke="#baf6ec" stroke-width="3" stroke-linecap="round" opacity=".8"><path d="M340 249q32 -5 55 0"/><path d="M447 273q46 -4 78 0"/><path d="M258 288q35 -4 60 0"/></g>
+          <g class="country-house" transform="translate(102 150)">
+            <rect x="11" y="27" width="112" height="78" rx="3" fill="#f1dcb2"/>
+            <path d="M-2 32 L67 -8 L137 32 Z" fill="#a84e35"/>
+            <path d="M8 32 L67 1 L126 32" fill="none" stroke="#df9770" stroke-width="4"/>
+            <rect x="23" y="50" width="26" height="30" fill="#9acbd1" stroke="#8f6f49" stroke-width="5"/>
+            <rect x="81" y="48" width="28" height="57" fill="#9f6741"/>
+            <path d="M0 106 H135" stroke="#b5b17b" stroke-width="6"/>
+          </g>
+          <g class="country-house" transform="translate(436 172) scale(.7)">
+            <rect x="9" y="26" width="106" height="76" rx="3" fill="#f4e3c5"/>
+            <path d="M-4 29 L64 -9 L130 29 Z" fill="#a95f43"/>
+            <rect x="27" y="47" width="26" height="26" fill="#acd5d4" stroke="#9d7e57" stroke-width="5"/>
+            <rect x="78" y="47" width="26" height="55" fill="#ae7355"/>
+          </g>
+          <g class="tree-sway" transform="translate(25 159)"><path d="M38 97 Q44 53 39 1" stroke="#6a5338" stroke-width="12" fill="none"/><ellipse cx="31" cy="25" rx="39" ry="36" fill="#2c7950"/><ellipse cx="59" cy="33" rx="35" ry="28" fill="#459b58"/><ellipse cx="31" cy="8" rx="32" ry="27" fill="#65b36a"/></g>
+          <g class="tree-sway alternate" transform="translate(565 148)"><path d="M26 90 L26 0" stroke="#72563c" stroke-width="9"/><ellipse cx="18" cy="19" rx="34" ry="37" fill="#3a8654"/><ellipse cx="38" cy="27" rx="30" ry="32" fill="#5bae64"/></g>
+          <g class="wetland-grass" stroke="#8dc67c" stroke-width="3" stroke-linecap="round"><path d="M15 300l8 -28m-8 28-9 -20m9 20 22 -18M97 301l-8 -25m8 25 12 -23M548 301l-7 -24m7 24 15 -22"/></g>
+          <g class="canoe"><path d="M372 277 Q417 292 468 273 L456 290 Q416 301 385 291Z" fill="#8b5036"/><path d="M422 275 L425 246" stroke="#654a33" stroke-width="4"/><path d="M425 246 L446 262 L425 265Z" fill="#f6e9ce"/></g>
+          <g class="birds" fill="none" stroke="#315557" stroke-width="3" stroke-linecap="round"><path d="M228 77q12 -13 24 0q12 -13 24 0"/><path d="M300 55q9 -10 19 0q10 -10 19 0"/></g>
+        </svg>
+        <div class="city-fog"></div>
       </div>
       <div class="city-life"><span id="cityLifeFill"></span></div>
     </div>
@@ -185,7 +252,7 @@ footer .meta{font-size:.8rem;color:#bee5d1}
   </div>
 
   <div class="card">
-    <div class="howto" id="howto">👉 Leia cada situação e escolha uma das três decisões. Boas escolhas <b>aumentam</b> a saúde do ecossistema; escolhas ruins a <b>reduzem</b>. Chegue ao fim com o maior índice possível!</div>
+    <div class="howto" id="howto"><strong>Como jogar:</strong> leia a situação e <strong>escolha a melhor opção.</strong> Veja como a natureza reage!</div>
 
     <div class="hud">
       <div class="stat"><small>Tempo</small><span id="hTime">0s</span></div>
@@ -533,7 +600,7 @@ function updateCity(outcome){
   const h=Math.round(health);
   box.classList.remove("state-low","state-mid","state-high","celebrate","warning");
   box.classList.add(h>=70?"state-high":h<40?"state-low":"state-mid");
-  mood.textContent=h>=70?"🌳 Cidade florescendo":h<40?"⚠️ Cidade em alerta":"🌱 Cidade em equilíbrio";
+  mood.textContent=h>=70?"🌳 Natureza florescendo":h<40?"⚠️ Natureza em alerta":"🌱 Natureza em equilíbrio";
   pct.textContent=h+"%";life.style.width=h+"%";
   if(outcome===true||outcome===false){
     void box.offsetWidth;
