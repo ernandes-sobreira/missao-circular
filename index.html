@@ -218,6 +218,20 @@ header.top .sub{font-size:clamp(1.08rem,1.7vw,1.3rem);line-height:1.45}
 .diagnosis-foot{font-size:.77rem;color:#63766a;line-height:1.45;margin:12px 0 0}
 @media(max-width:720px){.diagnosis-grid{grid-template-columns:1fr}}
 
+
+#sceneArt{height:240px;background:#e6f5ea}
+.scene-svg{width:100%;height:100%;display:block}
+.scene-cloud{animation:sceneCloud 11s ease-in-out infinite alternate}
+.art-move{animation:sceneMovement 3s ease-in-out infinite alternate;transform-box:fill-box;transform-origin:center}
+.art-line{stroke-dasharray:310;animation:sceneLine 5s ease-in-out infinite alternate}
+.art-cycle{animation:scenePulse 4s ease-in-out infinite alternate;transform-origin:320px 190px}
+@keyframes sceneCloud{to{transform:translateX(24px)}}
+@keyframes sceneMovement{to{transform:translateY(-4px)}}
+@keyframes sceneLine{to{stroke-dashoffset:45}}
+@keyframes scenePulse{to{transform:rotate(8deg)}}
+@media(max-width:550px){#sceneArt{height:195px}}
+@media(prefers-reduced-motion:reduce){.scene-cloud,.art-move,.art-line,.art-cycle{animation:none!important}}
+
 </style>
 </head>
 <body>
@@ -229,45 +243,8 @@ header.top .sub{font-size:clamp(1.08rem,1.7vw,1.3rem);line-height:1.45}
       <p class="sub"><strong>Escolha a melhor opção em cada situação.</strong><br>Suas decisões ajudam a natureza a se recuperar.</p>
     </div>
     <div class="city-box state-mid" id="cityBox">
-      <div class="city-caption"><span id="cityMood">🌱 Natureza em equilíbrio</span><strong id="cityPct">50%</strong></div>
-      <div class="city-scene" role="img" aria-label="Paisagem animada inspirada no Pantanal: rio, árvores, casas baixas, aves e canoa. Sua aparência reage às escolhas do jogador.">
-        <svg class="landscape" viewBox="0 0 640 320" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <defs>
-            <linearGradient id="mcSky" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#7fc6df"/><stop offset=".9" stop-color="#ecf6d3"/></linearGradient>
-            <linearGradient id="mcRiver" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#78c8c7"/><stop offset="1" stop-color="#176d87"/></linearGradient>
-            <linearGradient id="mcLand" x1="0" x2="0" y1="0" y2="1"><stop stop-color="#88af65"/><stop offset="1" stop-color="#337d4b"/></linearGradient>
-          </defs>
-          <rect width="640" height="320" fill="url(#mcSky)"/>
-          <circle class="land-sun" cx="530" cy="62" r="29" fill="#fff2b5"/>
-          <g class="land-cloud land-cloud-a" fill="#fff" opacity=".85"><ellipse cx="110" cy="66" rx="45" ry="16"/><ellipse cx="91" cy="56" rx="26" ry="20"/><ellipse cx="135" cy="55" rx="29" ry="20"/></g>
-          <g class="land-cloud land-cloud-b" fill="#fff" opacity=".74"><ellipse cx="385" cy="88" rx="49" ry="13"/><ellipse cx="369" cy="78" rx="26" ry="20"/><ellipse cx="401" cy="77" rx="28" ry="18"/></g>
-          <path d="M0 164 Q105 134 203 161 T428 150 T640 164 L640 320 H0Z" fill="#72a083"/>
-          <path d="M0 190 Q120 159 242 182 T485 175 T640 180 V320 H0Z" fill="url(#mcLand)"/>
-          <path d="M0 224 Q160 193 285 227 Q380 250 480 227 T640 212 V320 H0Z" fill="#458a57"/>
-          <path class="river" d="M252 219 Q342 208 393 234 Q461 255 640 246 V320 H175 Q250 278 252 219Z" fill="url(#mcRiver)"/>
-          <g class="water-glimmer" fill="none" stroke="#baf6ec" stroke-width="3" stroke-linecap="round" opacity=".8"><path d="M340 249q32 -5 55 0"/><path d="M447 273q46 -4 78 0"/><path d="M258 288q35 -4 60 0"/></g>
-          <g class="country-house" transform="translate(102 150)">
-            <rect x="11" y="27" width="112" height="78" rx="3" fill="#f1dcb2"/>
-            <path d="M-2 32 L67 -8 L137 32 Z" fill="#a84e35"/>
-            <path d="M8 32 L67 1 L126 32" fill="none" stroke="#df9770" stroke-width="4"/>
-            <rect x="23" y="50" width="26" height="30" fill="#9acbd1" stroke="#8f6f49" stroke-width="5"/>
-            <rect x="81" y="48" width="28" height="57" fill="#9f6741"/>
-            <path d="M0 106 H135" stroke="#b5b17b" stroke-width="6"/>
-          </g>
-          <g class="country-house" transform="translate(436 172) scale(.7)">
-            <rect x="9" y="26" width="106" height="76" rx="3" fill="#f4e3c5"/>
-            <path d="M-4 29 L64 -9 L130 29 Z" fill="#a95f43"/>
-            <rect x="27" y="47" width="26" height="26" fill="#acd5d4" stroke="#9d7e57" stroke-width="5"/>
-            <rect x="78" y="47" width="26" height="55" fill="#ae7355"/>
-          </g>
-          <g class="tree-sway" transform="translate(25 159)"><path d="M38 97 Q44 53 39 1" stroke="#6a5338" stroke-width="12" fill="none"/><ellipse cx="31" cy="25" rx="39" ry="36" fill="#2c7950"/><ellipse cx="59" cy="33" rx="35" ry="28" fill="#459b58"/><ellipse cx="31" cy="8" rx="32" ry="27" fill="#65b36a"/></g>
-          <g class="tree-sway alternate" transform="translate(565 148)"><path d="M26 90 L26 0" stroke="#72563c" stroke-width="9"/><ellipse cx="18" cy="19" rx="34" ry="37" fill="#3a8654"/><ellipse cx="38" cy="27" rx="30" ry="32" fill="#5bae64"/></g>
-          <g class="wetland-grass" stroke="#8dc67c" stroke-width="3" stroke-linecap="round"><path d="M15 300l8 -28m-8 28-9 -20m9 20 22 -18M97 301l-8 -25m8 25 12 -23M548 301l-7 -24m7 24 15 -22"/></g>
-          <g class="canoe"><path d="M372 277 Q417 292 468 273 L456 290 Q416 301 385 291Z" fill="#8b5036"/><path d="M422 275 L425 246" stroke="#654a33" stroke-width="4"/><path d="M425 246 L446 262 L425 265Z" fill="#f6e9ce"/></g>
-          <g class="birds" fill="none" stroke="#315557" stroke-width="3" stroke-linecap="round"><path d="M228 77q12 -13 24 0q12 -13 24 0"/><path d="M300 55q9 -10 19 0q10 -10 19 0"/></g>
-        </svg>
-        <div class="city-fog"></div>
-      </div>
+      <div class="city-caption"><span id="cityMood">🎨 Situação atual</span><strong id="cityPct">50%</strong></div>
+      <div class="city-scene" id="sceneArt" role="img" aria-label="Ilustração da situação atual"></div>
       <div class="city-life"><span id="cityLifeFill"></span></div>
     </div>
   </header>
@@ -644,7 +621,7 @@ function updateCity(outcome){
   const h=Math.round(health);
   box.classList.remove("state-low","state-mid","state-high","celebrate","warning");
   box.classList.add(h>=70?"state-high":h<40?"state-low":"state-mid");
-  mood.textContent=h>=70?"🌳 Natureza florescendo":h<40?"⚠️ Natureza em alerta":"🌱 Natureza em equilíbrio";
+  mood.textContent="🎨 Cena "+Math.min(idx+1,scenes.length)+" de "+scenes.length;
   pct.textContent=h+"%";life.style.width=h+"%";
   if(outcome===true||outcome===false){
     void box.offsetWidth;
@@ -663,9 +640,57 @@ function updateHUD(){
   updateCity();
 }
 
+
+/* Cada uma das 42 questões tem um tema visual contextual.
+   Ilustrações vetoriais simples; nenhum imóvel em área de preservação. */
+const artMeta={
+basico:[
+["feira","Feira local","Sacolas reutilizáveis"],["agua","Bebedouro","Garrafa durável"],["eletronico","Reparo de celular","Vida útil maior"],["alimento","Alimentos","Evite desperdício"],["roupa","Roupas","Doação e reuso"],["embalagem","Compras","Menos embalagens"],["lixeiras","Separação","Coleta seletiva"],["bicicleta","Mobilidade","Caminhe ou pedale"]],
+intermediario:[
+["lixeiras","Reduzir resíduos","Prevenção antes da coleta"],["reparo","Manutenção","Produtos que duram"],["caixa","Logística reversa","Devolução ao fabricante"],["ciclo","Reciclagem","Materiais em circulação"],["eletronico","Consumo de eletrônicos","Reparar e reutilizar"],["composta","Compostagem","Nutrientes voltam ao solo"],["reparo","Obsolescência","Evitar troca precoce"],["ciclo","Economia circular","Fechar ciclos"],["selo","Certificação ambiental","Verificar evidências"],["grafico","Metas de reciclagem","Medir resultados"]],
+dificil:[
+["ciclo","Hierarquia 9R","Priorizar redução"],["grafico","Circularidade mundial","Materiais reintroduzidos"],["caixa","Downcycling","Valor do material"],["ciclo","Berço ao berço","Ciclos regenerativos"],["globo","Pegada material","Uso de recursos"],["fabrica","Simbiose industrial","Aproveitar subprodutos"],["reparo","Ecodesign","Projetar para durar"],["eletronico","Logística de eletrônicos","Descarte responsável"],["selo","Greenwashing","Propaganda e realidade"],["fabrica","Responsabilidade do produtor","Pós-consumo"],["caixa","Legislação de resíduos","Materiais e regras"],["lixeiras","Destinação adequada","Separação dos fluxos"]],
+carbonauta:[
+["ciclo","Estratégia R0","Recusar e repensar"],["grafico","Circularity Gap","Taxa de circularidade"],["ciclo","Ciclos técnicos e biológicos","Recuperar valor"],["grafico","Efeito rebote","Eficiência versus consumo"],["reparo","Análise de ciclo de vida","Comparar impactos"],["globo","Recursos virgens","Reduzir extração"],["ciclo","Alumínio","Reciclagem de metal"],["fabrica","EPR","Responsabilidade pós-consumo"],["fabrica","Kalundborg","Troca entre indústrias"],["grafico","Indicador MCI","Circularidade de produtos"],["globo","Limites planetários","Uso de recursos"],["ciclo","Economia circular","Redesenhar sistemas"]]
+};
+const artIcons={
+feira:'<path d="M150 150h340v34H150z" fill="#e8b77e"/><path d="M160 150v-48h320v48" fill="#f6dfbc"/><path d="M160 102h80v48h-80zm160 0h80v48h-80z" fill="#d68e61"/><path d="M190 185v95m260-95v95" stroke="#8b694b" stroke-width="13"/><g fill="#9abb67"><circle cx="250" cy="185" r="18"/><circle cx="303" cy="185" r="18"/></g><path d="M410 205h65v57h-65z" fill="#65b996"/><path d="M422 205q18 -33 40 0" fill="none" stroke="#478971" stroke-width="8"/>',
+agua:'<rect x="155" y="105" width="190" height="170" rx="18" fill="#b6d7d5"/><rect x="190" y="137" width="118" height="110" rx="10" fill="#e4f7f5"/><path d="M230 170h60v35" stroke="#608f96" stroke-width="14" fill="none"/><path class="art-move" d="M283 206q-21 30 0 44q21 -14 0 -44" fill="#48bbd5"/><rect x="410" y="155" width="65" height="118" rx="16" fill="#60bba3"/><rect x="425" y="134" width="35" height="26" rx="6" fill="#498e96"/>',
+eletronico:'<rect x="155" y="90" width="155" height="200" rx="24" fill="#344a54"/><rect x="171" y="108" width="123" height="156" rx="11" fill="#9fd4db"/><circle cx="234" cy="278" r="7" fill="#ddd"/><path d="M400 123l90 93" stroke="#788c93" stroke-width="17" stroke-linecap="round"/><path d="M393 112l-19 -35 33 -19 18 33z" fill="#b1c9c8"/>',
+alimento:'<ellipse cx="320" cy="234" rx="215" ry="40" fill="#baa17a"/><ellipse cx="320" cy="218" rx="175" ry="34" fill="#f3efdf" stroke="#d7d5c3" stroke-width="11"/><ellipse cx="300" cy="212" rx="57" ry="20" fill="#89b96d"/><circle cx="355" cy="214" r="25" fill="#e5ac61"/><rect x="445" y="123" width="95" height="91" rx="11" fill="#78bbae"/><path d="M437 125h110" stroke="#528a81" stroke-width="13" stroke-linecap="round"/>',
+roupa:'<path d="M150 110h335M170 110v170m295 -170v170" stroke="#987d56" stroke-width="10"/><path class="art-move" d="M207 129l49 -20 39 20 46 -8 21 40 -36 20 -9 -15v102h-109V166l-9 15 -36 -20z" fill="#78bda8" stroke="#447c71" stroke-width="7"/><path d="M403 140h62l25 119h-110z" fill="#d9b17f"/>',
+embalagem:'<path d="M163 166l155 -70 154 70 -154 77z" fill="#e9c394"/><path d="M163 166v108l155 38V243z" fill="#c79969"/><path d="M472 166v108l-154 38V243z" fill="#b78961"/><path d="M318 97v146" stroke="#faeed7" stroke-width="9"/>',
+lixeiras:'<g><rect x="108" y="136" width="125" height="141" rx="10" fill="#5799b9"/><rect x="255" y="136" width="125" height="141" rx="10" fill="#73b37f"/><rect x="402" y="136" width="125" height="141" rx="10" fill="#deb56c"/><path d="M98 137h145m2 0h145m2 0h145" stroke="#476f77" stroke-width="15" stroke-linecap="round"/></g>',
+bicicleta:'<g fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="196" cy="236" r="62" stroke="#45636a" stroke-width="12"/><circle cx="450" cy="236" r="62" stroke="#45636a" stroke-width="12"/><path d="M196 236l97 -116 76 116H196l97 -116m76 116 52 -112h44M262 120h57" stroke="#63b99a" stroke-width="12"/></g>',
+reparo:'<rect x="135" y="246" width="375" height="25" rx="7" fill="#9b7855"/><rect x="180" y="141" width="158" height="102" rx="10" fill="#c4d2c1"/><path d="M209 175h100m-100 28h70" stroke="#7ca6a0" stroke-width="11" stroke-linecap="round"/><path class="art-move" d="M398 125l77 85" stroke="#7f8b94" stroke-width="18" stroke-linecap="round"/><path d="M379 107l21 -24 26 36 -25 19z" fill="#bcc8c5"/>',
+caixa:'<path d="M168 171l149 -72 150 72 -150 73z" fill="#efd2a4"/><path d="M168 171v96l149 41v-64z" fill="#cb9d69"/><path d="M467 171v96l-150 41v-64z" fill="#b98b63"/><path class="art-move" d="M494 114q34 34 5 74" fill="none" stroke="#579b87" stroke-width="13" stroke-linecap="round"/><path d="M491 170l8 18 23 -9" fill="none" stroke="#579b87" stroke-width="10"/>',
+ciclo:'<g class="art-cycle" fill="none" stroke="#56aa91" stroke-width="21" stroke-linecap="round" stroke-linejoin="round"><path d="M245 113q91 -79 171 0"/><path d="M390 88l26 25 -29 27"/><path d="M420 198q4 105 -100 105"/><path d="M346 277l-26 26 27 26"/><path d="M221 255q-67 -85 2 -152"/><path d="M200 131l23 -28 32 26"/></g><circle cx="320" cy="201" r="49" fill="#bde3d4"/><path d="M317 225q-41 -29 -7 -60q42 -13 33 24q28 23 -26 36" fill="#7dbb8a"/>',
+composta:'<path d="M176 159h302l-40 124H215z" fill="#a07c52"/><path d="M166 159h322" stroke="#795c43" stroke-width="17"/><path d="M232 198h178M256 238h126" stroke="#71583f" stroke-width="9"/><path class="art-move" d="M320 160q-47 -71 -5 -97q48 17 5 97M321 145q36 -66 82 -43q-9 46 -82 43" fill="#70b477"/>',
+selo:'<circle cx="322" cy="190" r="119" fill="#8bc6a7" stroke="#4e9d81" stroke-width="14"/><path d="M256 193l48 45 87 -94" fill="none" stroke="#f2fff5" stroke-width="22" stroke-linecap="round" stroke-linejoin="round"/><path d="M252 294l-18 42 56 -18m110 -24 16 42 -56 -18" fill="#5b9c7b"/>',
+grafico:'<path d="M160 91v195h340" fill="none" stroke="#758b81" stroke-width="10"/><rect x="208" y="195" width="57" height="88" rx="7" fill="#8bcdb4"/><rect x="292" y="155" width="57" height="128" rx="7" fill="#65b4ac"/><rect x="376" y="120" width="57" height="163" rx="7" fill="#479999"/><path class="art-line" d="M195 176l117 -60 116 1 62 -46" fill="none" stroke="#e2ad67" stroke-width="9" stroke-linecap="round"/>',
+globo:'<circle cx="320" cy="190" r="122" fill="#83c4d4" stroke="#4c9b9c" stroke-width="9"/><path d="M252 102l50 8 27 46 -42 27 -10 47 -49 -25 -17 -47zM358 184l56 -27 29 37 -34 39 -4 42 -55 9 -20 -54z" fill="#8bb477"/><path d="M198 190h244M217 135h206M222 251h194" stroke="#e6f8ef" stroke-width="6" opacity=".55" fill="none"/>',
+fabrica:'<path d="M130 288V150l100 50v-50l100 50v-92h145v180z" fill="#9cb6ad" stroke="#647d77" stroke-width="8"/><rect x="383" y="63" width="45" height="65" fill="#728b8e"/><g fill="#d8e8da"><rect x="171" y="229" width="39" height="40"/><rect x="258" y="229" width="39" height="40"/><rect x="356" y="229" width="39" height="40"/></g><path class="art-move" d="M404 60q-17 -21 0 -43" fill="none" stroke="#d6e4de" stroke-width="10"/>'
+};
+function renderSceneArt(){
+ const target=document.getElementById("sceneArt");if(!target)return;
+ const config=artMeta[level] && artMeta[level][idx] || ["ciclo","Economia circular","Decisões"];
+ const kind=config[0], title=config[1], tip=config[2];
+ target.setAttribute("aria-label","Ilustração da cena: "+title+". "+tip+".");
+ target.innerHTML='<svg class="scene-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 340" aria-hidden="true">'
+ +'<rect width="640" height="340" fill="#e6f5ea"/>'
+ +'<path d="M0 282q120 -19 252 0t388 -2v60H0z" fill="#bbd9b5"/>'
+ +'<circle cx="553" cy="58" r="29" fill="#ffe9ac"/>'
+ +'<g class="scene-cloud" fill="#fff"><ellipse cx="103" cy="76" rx="59" ry="17"/><ellipse cx="84" cy="65" rx="30" ry="23"/><ellipse cx="125" cy="62" rx="34" ry="26"/></g>'
+ +(artIcons[kind]||artIcons.ciclo)
+ +'<rect x="14" y="12" width="340" height="63" rx="12" fill="#fff" opacity=".96"/>'
+ +'<text x="29" y="39" font-size="20" font-weight="800" font-family="system-ui,sans-serif" fill="#205743">'+esc(title)+'</text>'
+ +'<text x="29" y="60" font-size="14" font-family="system-ui,sans-serif" fill="#487966">'+esc(tip)+'</text></svg>';
+}
+
 function renderScene(){
   answered = false;
   const sc = scenes[idx];
+  renderSceneArt();
   $("scene").textContent = "Cena " + (idx+1) + ": " + sc.q;
   $("fb").classList.remove("show");
   $("next").classList.remove("show");
