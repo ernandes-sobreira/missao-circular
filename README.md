@@ -16,8 +16,8 @@ A cidade começa com **50 pontos**. O valor é um **indicador didático**, não 
 
 ## Experiência
 
-- Cidade com árvores, nuvens, luz do sol e paisagem em animação suave.
-- Cenário da cidade muda conforme os impactos acumulados.
+- Paisagem de comunidade do interior e ambientes inspirados no Pantanal, com rio, canoa, casas baixas, árvores, aves, nuvens e sol em animação suave.
+- O ambiente natural muda conforme os impactos acumulados, sem paisagens de arranha-céus ou grandes centros urbanos.
 - Feedback educacional imediato e mensagens que traduzem consequências das decisões.
 - Quatro dificuldades com situações diferentes.
 - Cronômetro, progresso, indicador de saúde do ecossistema e contagem de escolhas.
