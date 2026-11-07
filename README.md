@@ -16,8 +16,8 @@ A cidade começa com **50 pontos**. O valor é um **indicador didático**, não 
 
 ## Experiência
 
-- Paisagem de comunidade do interior e ambientes inspirados no Pantanal, com rio, canoa, casas baixas, árvores, aves, nuvens e sol em animação suave.
-- O ambiente natural muda conforme os impactos acumulados, sem paisagens de arranha-céus ou grandes centros urbanos.
+- Ilustrações vetoriais diferentes para cada uma das 42 situações nos quatro níveis, representando mercados, reparo, coleta seletiva, recursos naturais, indicadores e fluxos de materiais.
+- A ilustração acompanha o assunto da pergunta, enquanto o índice ambiental acompanha o resultado acumulado das decisões. Não há casas representadas em APP nem paisagem urbana de grandes prédios.
 - Feedback educacional imediato e mensagens que traduzem consequências das decisões.
 - Quatro dificuldades com situações diferentes.
 - Cronômetro, progresso, indicador de saúde do ecossistema e contagem de escolhas.
