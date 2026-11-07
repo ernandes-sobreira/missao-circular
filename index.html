@@ -190,6 +190,15 @@ header.top .sub{font-size:clamp(1.08rem,1.7vw,1.3rem);line-height:1.45}
 @media(max-width:550px){.city-scene{height:215px}header.top h1{font-size:2.6rem}.howto{font-size:.98rem}}
 @media(prefers-reduced-motion:reduce){.land-sun,.land-cloud,.tree-sway,.water-glimmer,.canoe,.birds{animation:none!important}}
 
+
+/* CORREÇÃO: árvores têm raízes fixas no solo. Não animar transform de grupos SVG
+   com translate(), pois substituiria o posicionamento e faria as árvores 'voarem'. */
+.landscape .tree-sway,
+.landscape .tree-sway.alternate{
+  animation:none!important;
+  transform-box:view-box;
+}
+
 </style>
 </head>
 <body>
