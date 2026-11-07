@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Missão Circular ♻️ — Consumo Consciente e Economia Circular</title>
+<style>
+:root{
+  --bg1:#0f3d2e; --bg2:#1f7a4d; --card:#ffffff; --card2:#f2fbf5;
+  --ink:#0f2a20; --muted:#4a6b5c; --line:#cfe8da;
+  --accent:#22c55e; --accent-d:#15803d; --good:#16a34a; --bad:#dc2626;
+  --gold:#eab308; --shadow:0 10px 30px rgba(6,40,25,.18);
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  font-family:system-ui,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  color:var(--ink); min-height:100vh;
+  background:linear-gradient(160deg,var(--bg1) 0%,var(--bg2) 100%);
+  padding:18px 12px 40px;
+}
+.wrap{width:min(860px,95vw);margin:0 auto}
+header.top{text-align:center;color:#eafff3;margin-bottom:14px}
+h1{font-size:clamp(1.6rem,4.5vw,2.6rem);margin:.1em 0;letter-spacing:.5px;text-shadow:0 2px 10px rgba(0,0,0,.25)}
+.sub{opacity:.92;font-size:clamp(.85rem,2.4vw,1rem);margin:0 0 4px}
+.levels{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:14px 0 6px}
+.pill{
+  border:none;cursor:pointer;padding:10px 16px;border-radius:999px;
+  font-size:clamp(.8rem,2.2vw,.98rem);font-weight:700;color:#0f3d2e;
+  background:#e6fff0;box-shadow:var(--shadow);transition:transform .2s,background .25s,color .25s;
+}
+.pill:hover{transform:translateY(-2px)}
+.pill.active{background:var(--accent);color:#04240f;outline:3px solid #bbf7d0}
+.card{
+  background:var(--card);border-radius:18px;box-shadow:var(--shadow);
+  padding:18px 18px 20px;margin-top:14px;
+}
+.howto{background:var(--card2);border:1px dashed var(--line);border-radius:12px;padding:10px 12px;color:var(--muted);font-size:.92rem;margin-bottom:12px}
+.hud{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.stat{
+  flex:1 1 120px;background:var(--card2);border:1px solid var(--line);border-radius:12px;
+  padding:8px 10px;text-align:center;font-weight:700;font-size:.92rem;color:var(--ink)
+}
+.stat small{display:block;font-weight:600;color:var(--muted);font-size:.72rem;margin-bottom:2px;text-transform:uppercase;letter-spacing:.4px}
+.ecowrap{margin:6px 0 14px}
+.ecolabel{display:flex;justify-content:space-between;font-size:.82rem;color:var(--muted);font-weight:600;margin-bottom:4px}
+.ecobar{height:18px;background:#e5eee9;border-radius:999px;overflow:hidden;box-shadow:inset 0 1px 3px rgba(0,0,0,.12)}
+.ecofill{height:100%;width:50%;background:var(--good);border-radius:999px;transition:width .5s ease,background .5s}
+.progress{height:8px;background:#e5eee9;border-radius:999px;overflow:hidden;margin-bottom:14px}
+.progfill{height:100%;width:0%;background:var(--accent);transition:width .35s}
+.scene{font-size:clamp(1.05rem,3vw,1.28rem);font-weight:700;line-height:1.4;margin:4px 0 14px}
+.opts{display:flex;flex-direction:column;gap:10px}
+.opt{
+  text-align:left;cursor:pointer;border:2px solid var(--line);background:#fff;
+  border-radius:14px;padding:14px 16px;font-size:clamp(.95rem,2.6vw,1.05rem);font-weight:600;color:var(--ink);
+  transition:transform .2s,border-color .2s,background .2s,box-shadow .2s;
+}
+.opt:hover{transform:translateY(-2px);border-color:var(--accent);box-shadow:0 6px 16px rgba(34,197,94,.18)}
+.opt.correct{border-color:var(--good);background:#eafaf0;animation:pop .35s}
+.opt.wrong{border-color:var(--bad);background:#fdeaea;animation:shake .4s}
+.opt.dim{opacity:.55}
+.opt:disabled{cursor:default}
+@keyframes pop{0%{transform:scale(1)}45%{transform:scale(1.05)}100%{transform:scale(1)}}
+@keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-7px)}40%{transform:translateX(7px)}60%{transform:translateX(-5px)}80%{transform:translateX(5px)}}
+.fb{margin-top:14px;padding:12px 14px;border-radius:12px;background:var(--card2);border-left:5px solid var(--accent);font-size:.96rem;line-height:1.5;display:none}
+.fb.show{display:block;animation:pop .3s}
+.fb .impact{font-weight:800}
+.next{
+  margin-top:14px;width:100%;border:none;cursor:pointer;padding:14px;border-radius:14px;
+  background:var(--accent-d);color:#fff;font-weight:800;font-size:1.02rem;transition:transform .2s,background .2s;display:none
+}
+.next.show{display:block}
+.next:hover{transform:translateY(-2px);background:var(--good)}
+/* final */
+.final{text-align:center;display:none}
+.final.show{display:block;animation:pop .4s}
+.final .emoji{font-size:3rem}
+.final h2{font-size:clamp(1.4rem,4vw,2rem);margin:.2em 0;color:var(--accent-d)}
+.final .verdict{font-size:1.15rem;font-weight:800;margin:.3em 0}
+.final .resume{color:var(--muted);margin:.4em 0 1em}
+.namerow{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-bottom:10px}
+.namerow input{flex:1 1 200px;max-width:320px;padding:12px 14px;border:2px solid var(--line);border-radius:12px;font-size:1rem}
+.saveBtn{border:none;cursor:pointer;padding:12px 18px;border-radius:12px;background:var(--accent);color:#04240f;font-weight:800;transition:transform .2s}
+.saveBtn:hover{transform:translateY(-2px)}
+.replay{margin-top:8px;background:none;border:2px solid var(--line);color:var(--muted);padding:10px 16px;border-radius:12px;cursor:pointer;font-weight:700}
+/* ranking */
+.rank{margin-top:16px}
+.rank h3{margin:.2em 0;font-size:1.05rem;color:var(--ink)}
+.ranklvl{font-size:.8rem;color:var(--muted);font-weight:700;margin-bottom:8px}
+.rankmsg{font-size:.86rem;color:var(--muted);padding:6px 0}
+table.rk{width:100%;border-collapse:collapse;font-size:.9rem}
+table.rk th,table.rk td{padding:7px 8px;text-align:left;border-bottom:1px solid var(--line)}
+table.rk th{color:var(--muted);font-size:.74rem;text-transform:uppercase;letter-spacing:.4px}
+table.rk td.pos{font-weight:800;color:var(--accent-d);width:34px}
+table.rk td.sc{text-align:right;font-weight:800}
+footer{color:#eafff3;text-align:center;margin-top:22px;line-height:1.6}
+footer .idea{font-weight:800;font-size:1.05rem;text-shadow:0 2px 8px rgba(0,0,0,.25)}
+footer .meta{opacity:.85;font-size:.85rem}
+
+/* Missão Circular — identidade visual e cidade viva */
+:root{--bg1:#071f22;--bg2:#124b3b;--card:#f7fff9;--card2:#e9f8f0;--ink:#122d26;--muted:#436c5a;--line:#cfebd9;--accent:#74ebaf;--accent-d:#167a50;--good:#22b877;--bad:#e36b6b;--gold:#efbc53;--shadow:0 18px 55px rgba(0,18,22,.25)}
+body{background:#071e1d;isolation:isolate;overflow-x:hidden;color:#eafff4;padding:24px 15px 36px}
+body:before{content:"";position:fixed;inset:-15%;z-index:-2;pointer-events:none;background:radial-gradient(ellipse at 13% 18%,rgba(36,155,110,.32),transparent 38%),radial-gradient(ellipse at 87% 80%,rgba(21,168,183,.27),transparent 43%),linear-gradient(130deg,#051b1b,#103e38 60%,#13372c);animation:ambientShift 18s ease-in-out infinite alternate}
+body:after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background-image:radial-gradient(rgba(196,255,214,.12) 1px,transparent 1px);background-size:34px 34px;opacity:.32}
+@keyframes ambientShift{to{transform:translate(2%,-2%) scale(1.05)}}
+.wrap{width:min(1120px,96vw)}
+header.top{display:grid;grid-template-columns:minmax(0,1fr) minmax(260px,390px);gap:28px;align-items:center;text-align:left;margin-bottom:24px}
+.hero-copy .eyebrow{font-size:.76rem;color:#a7f7d4;font-weight:850;letter-spacing:.12em;text-transform:uppercase;margin-bottom:15px}
+header.top h1{font-size:clamp(2.7rem,5.7vw,5.2rem);letter-spacing:-.055em;line-height:1.04;color:#f6fff9;margin:0;text-shadow:0 5px 30px #001c1b66}
+header.top h1 span{color:#91f4b7}
+header.top .sub{font-size:clamp(1rem,1.6vw,1.18rem);line-height:1.6;max-width:560px;margin-top:15px}
+.hero-support{font-size:.91rem;line-height:1.55;color:#c4e6d6;margin-top:12px;max-width:560px}
+.city-box{padding:15px;border:1px solid #b4f5d34d;border-radius:24px;background:#0d423cba;box-shadow:0 18px 50px #00181d7d;backdrop-filter:blur(9px)}
+.city-caption{display:flex;align-items:center;justify-content:space-between;font-size:.9rem;margin:0 2px 10px;font-weight:750;color:#dcfff0}
+.city-caption strong{color:#b2ffd7}
+.city-scene{height:202px;position:relative;border-radius:16px;overflow:hidden;background:linear-gradient(180deg,#225477,#347f84 56%,#4da176);transition:background 1s ease}
+.city-scene:before{content:"";position:absolute;top:22px;right:37px;width:48px;height:48px;border-radius:50%;background:#ffe59c;box-shadow:0 0 48px #fff5b585;animation:sunBreathe 4s ease-in-out infinite alternate}
+@keyframes sunBreathe{to{transform:scale(1.12);box-shadow:0 0 68px #fff0aaaf}}
+.cloud{position:absolute;top:28px;left:12%;width:78px;height:22px;background:#d9f7f1ac;border-radius:50px;animation:cloudMove 10s ease-in-out infinite alternate}
+.cloud:before,.cloud:after{content:"";position:absolute;background:#d9f7f1ac;border-radius:50%}
+.cloud:before{width:33px;height:29px;left:12px;top:-12px}.cloud:after{width:40px;height:36px;right:12px;top:-17px}
+@keyframes cloudMove{to{transform:translateX(35px)}}
+.buildings{position:absolute;bottom:37px;left:0;right:0;height:93px;display:flex;align-items:end;gap:9px;padding:0 18px}
+.building{flex:1;position:relative;border-radius:5px 5px 0 0;background:linear-gradient(155deg,#21495a,#142b43);transition:background .8s ease}
+.building:nth-child(1){height:54%}.building:nth-child(2){height:83%}.building:nth-child(3){height:64%}.building:nth-child(4){height:100%}.building:nth-child(5){height:73%}.building:nth-child(6){height:89%}
+.building:before{content:"";position:absolute;inset:10px 8px 10px;background:repeating-linear-gradient(90deg,#ffeab27d 0 5px,transparent 5px 13px);opacity:.8}
+.city-ground{position:absolute;bottom:0;left:0;right:0;height:43px;background:linear-gradient(#389363,#226a55);transition:background .8s ease}
+.city-tree{position:absolute;bottom:18px;width:31px;height:31px;background:#7be6a0;border-radius:50%;box-shadow:0 0 0 6px #8eeaad23;animation:treeSway 5s ease-in-out infinite alternate;transform-origin:center bottom}
+.city-tree:after{content:"";position:absolute;top:25px;left:13px;background:#5c543b;width:5px;height:26px}
+.city-tree.t1{left:26px}.city-tree.t2{left:110px;animation-delay:-2s}.city-tree.t3{right:82px;animation-delay:-1s}.city-tree.t4{right:20px;animation-delay:-3s}
+@keyframes treeSway{to{transform:rotate(5deg)}}
+.city-fog{position:absolute;inset:0;background:linear-gradient(180deg,#62616c88,#6d525344);opacity:0;transition:opacity .8s ease;pointer-events:none}
+.city-box.state-low .city-fog{opacity:.8}.city-box.state-low .city-tree{background:#c3bc85}.city-box.state-low .city-ground{background:#7b7252}.city-box.state-low .city-scene{background:linear-gradient(#716a79,#7b7b78,#897f66)}
+.city-box.state-high .city-scene{background:linear-gradient(#127096,#2db39d 62%,#6bc978)}.city-box.state-high .city-tree{background:#a7ffc0}
+.city-life{height:12px;border-radius:100px;background:#ffffff28;margin-top:13px;overflow:hidden}
+.city-life span{display:block;height:100%;width:50%;background:linear-gradient(90deg,#ecc65e,#6ee3a7);border-radius:100px;transition:width .7s cubic-bezier(.2,.8,.2,1)}
+.city-box.celebrate{animation:happyCity .55s ease}.city-box.warning{animation:shakyCity .45s ease}
+@keyframes happyCity{50%{transform:scale(1.025)}}@keyframes shakyCity{20%,60%{transform:translateX(-4px)}40%,80%{transform:translateX(4px)}}
+.levels{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:4px 0 16px}
+.pill{border-radius:16px;background:#ffffff12;border:1px solid #ffffff40;color:#e9fff3;font-size:1rem;padding:15px 10px;box-shadow:none}
+.pill.active{background:linear-gradient(110deg,#65e8c0,#aeefb0);color:#063126;outline:none;box-shadow:0 10px 22px #40f0aa24}
+.card{background:linear-gradient(160deg,#f7fff9,#f0f9f3);border-radius:26px;padding:26px 30px;box-shadow:0 20px 55px #001e2080}
+.howto{border:none;background:#e5f6eb;border-radius:15px;font-size:.95rem;padding:14px}
+.hud{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.stat{font-size:1.12rem;padding:14px 10px;background:#e6f5ed;border-color:#d4ebde;border-radius:15px}
+.stat small{font-size:.74rem;margin-bottom:5px}
+.ecobar{height:14px}.ecofill{transition:width .75s cubic-bezier(.2,.8,.2,1)}
+.scene{font-size:clamp(1.25rem,2.2vw,1.68rem);margin:15px 0 20px;letter-spacing:-.02em}
+.opts{gap:12px}.opt{font-size:1.05rem;border-radius:16px;min-height:64px;padding:16px 19px;background:#fff;box-shadow:0 4px 10px #001b1b0a}
+.opt:hover:not(:disabled){transform:translateY(-3px);box-shadow:0 12px 22px #177f4923}
+.fb{background:#e9f7ed;line-height:1.65;padding:18px;border-left-width:5px}
+.next{border-radius:15px;padding:16px;background:linear-gradient(110deg,#10a780,#58dba2);color:#042820}
+.rank{padding-top:12px}.rank h3{font-size:1.2rem}.rankmsg{font-size:.93rem}
+footer .meta{font-size:.8rem;color:#bee5d1}
+@media(max-width:800px){header.top{grid-template-columns:1fr;gap:14px}.city-box{max-width:520px;width:100%;margin:auto}.levels{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:550px){body{padding:14px 8px 22px}.wrap{width:100%}.card{padding:18px 15px}.hud{grid-template-columns:repeat(2,1fr)}.pill{padding:12px 5px}.city-scene{height:180px}.opt{min-height:60px}}
+@media(prefers-reduced-motion:reduce){body:before,.cloud,.city-tree,.city-scene:before{animation:none!important}.city-box,.city-life span,.ecofill{transition:none!important}}
+
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="hero-copy">
+      <div class="eyebrow">♻️ CIDADE · DECISÕES · FUTURO</div>
+      <h1>Missão <span>Circular</span></h1>
+      <p class="sub">Suas decisões transformam a cidade. Escolha, descubra as consequências e veja a natureza reagir.</p>
+      <p class="hero-support">Reutilize, repare, reduza desperdícios e ajude o ecossistema a florescer. Cada escolha faz diferença.</p>
+    </div>
+    <div class="city-box state-mid" id="cityBox">
+      <div class="city-caption"><span id="cityMood">🌱 Cidade em equilíbrio</span><strong id="cityPct">50%</strong></div>
+      <div class="city-scene" role="img" aria-label="Ilustração animada de cidade cuja aparência muda com o índice ambiental">
+        <div class="cloud"></div><div class="buildings"><span class="building"></span><span class="building"></span><span class="building"></span><span class="building"></span><span class="building"></span><span class="building"></span></div>
+        <div class="city-ground"></div><span class="city-tree t1"></span><span class="city-tree t2"></span><span class="city-tree t3"></span><span class="city-tree t4"></span><div class="city-fog"></div>
+      </div>
+      <div class="city-life"><span id="cityLifeFill"></span></div>
+    </div>
+  </header>
+
+  <div class="levels" id="levels">
+    <button class="pill" data-lvl="basico">Básico</button>
+    <button class="pill" data-lvl="intermediario">Intermediário</button>
+    <button class="pill" data-lvl="dificil">Difícil</button>
+    <button class="pill" data-lvl="carbonauta">🛰️ Carbonauta</button>
+  </div>
+
+  <div class="card">
+    <div class="howto" id="howto">👉 Leia cada situação e escolha uma das três decisões. Boas escolhas <b>aumentam</b> a saúde do ecossistema; escolhas ruins a <b>reduzem</b>. Chegue ao fim com o maior índice possível!</div>
+
+    <div class="hud">
+      <div class="stat"><small>Tempo</small><span id="hTime">0s</span></div>
+      <div class="stat"><small>Cena</small><span id="hScene">1/8</span></div>
+      <div class="stat"><small>Boas escolhas</small><span id="hGood">0</span></div>
+      <div class="stat"><small>Índice (pontos)</small><span id="hHealth">50%</span></div>
+    </div>
+
+    <div class="ecowrap">
+      <div class="ecolabel"><span>🌍 Saúde do ecossistema</span><span id="ecoTxt">50%</span></div>
+      <div class="ecobar"><div class="ecofill" id="ecoFill"></div></div>
+    </div>
+
+    <div class="progress"><div class="progfill" id="prog"></div></div>
+
+    <div id="play">
+      <div class="scene" id="scene">Carregando…</div>
+      <div class="opts" id="opts"></div>
+      <div class="fb" id="fb"></div>
+      <button class="next" id="next">Próxima cena →</button>
+    </div>
+
+    <div class="final" id="final">
+      <div class="emoji" id="finEmoji">🎉</div>
+      <h2>Fim da missão!</h2>
+      <div class="verdict" id="finVerdict"></div>
+      <div class="resume" id="finResume"></div>
+      <div class="namerow">
+        <input id="nameIn" maxlength="20" placeholder="Seu nome (até 20 caracteres)">
+        <button class="saveBtn" id="saveBtn">Salvar no ranking</button>
+      </div>
+      <div class="rankmsg" id="saveMsg"></div>
+      <button class="replay" id="replay">Jogar de novo</button>
+    </div>
+
+    <div class="rank">
+      <h3>🏆 Ranking Global</h3>
+      <div class="ranklvl" id="rankLvl">Nível: Básico</div>
+      <div id="rankBox"><div class="rankmsg">Carregando ranking…</div></div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="idea">— Idealizado por ERNANDES SOBREIRA —</div>
+    <div class="meta">Tema: Consumo consciente e economia circular · Gênero: Cenário de decisões ramificado · app ambiental do dia (2026-08-04)</div>
+  </footer>
+</div>
+
+<script>
+/* ================= Firebase (somente ranking) ================= */
+const firebaseConfig = {
+  apiKey: "AIzaSyCbXi3UCVl8oLleBzGb6DqWSxbZmZU2yDQ",
+  authDomain: "jogos-ranking.firebaseapp.com",
+  databaseURL: "https://jogos-ranking-default-rtdb.firebaseio.com",
+  projectId: "jogos-ranking",
+  storageBucket: "jogos-ranking.firebasestorage.app",
+  messagingSenderId: "958784915420",
+  appId: "1:958784915420:web:4212d3ad278f02d600f119"
+};
+const GAME_ID = "2026-08-04-missao-circular";
+
+let fb = { ok:false, db:null, mod:null };
+async function initFirebase(){
+  try{
+    const app = await import("https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js");
+    const fs  = await import("https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js");
+    const a = app.initializeApp(firebaseConfig);
+    fb.db = fs.getFirestore(a); fb.mod = fs; fb.ok = true;
+  }catch(e){ fb.ok = false; }
+}
+
+/* ================= Conteúdo dos níveis ================= */
+/* q: 2 = melhor escolha, 1 = intermediária, 0 = pior escolha */
+const DATA = {
+  basico: { label:"Básico", value:6, scenes:[
+    {q:"No mercado, o que você usa para carregar as compras?", o:[
+      {t:"Usar sacola de pano", q:2, fb:"Sacola de pano reutilizável evita dezenas de sacolas plásticas por mês."},
+      {t:"Comprar sacola de papel", q:1, fb:"Papel é reciclável, mas ainda gera descarte a cada compra."},
+      {t:"Pegar sacolas plásticas novas", q:0, fb:"Sacola plástica vira lixo rápido e polui rios e oceanos."}
+    ]},
+    {q:"Está com sede na rua. Como se hidratar?", o:[
+      {t:"Levar garrafa reutilizável própria", q:2, fb:"Uma garrafa durável substitui centenas de descartáveis por ano."},
+      {t:"Comprar suco em lata", q:1, fb:"Lata é reciclável, mas produzir alumínio novo gasta muita energia."},
+      {t:"Comprar água em descartável", q:0, fb:"Garrafa PET de uso único vira resíduo plástico rapidamente."}
+    ]},
+    {q:"Seu celular está lento, mas funciona. O que fazer?", o:[
+      {t:"Limpar e continuar usando", q:2, fb:"Prolongar a vida útil evita lixo eletrônico e economiza recursos."},
+      {t:"Trocar a bateria dele", q:1, fb:"Trocar a bateria é um bom reparo e adia a compra de outro."},
+      {t:"Comprar um modelo novo", q:0, fb:"Aparelhos novos geram mineração e mais descarte de eletrônicos."}
+    ]},
+    {q:"Sobrou comida no seu prato hoje. Destino?", o:[
+      {t:"Guardar para outra refeição", q:2, fb:"Reaproveitar comida reduz desperdício e emissões de metano no aterro."},
+      {t:"Dar sobras ao cachorro", q:1, fb:"Alimentar animais evita o lixo, se a comida for adequada a eles."},
+      {t:"Jogar tudo no lixo", q:0, fb:"Comida no aterro apodrece e libera metano, gás de efeito estufa."}
+    ]},
+    {q:"Roupa velha que não serve mais. O que fazer?", o:[
+      {t:"Doar para quem precisa", q:2, fb:"Doar dá nova vida à peça e evita comprar e descartar mais roupas."},
+      {t:"Guardar parada no armário", q:1, fb:"Guardar não descarta, mas a peça parada não ajuda ninguém."},
+      {t:"Jogar direto no lixo", q:0, fb:"Têxteis no lixo comum viram resíduo que demora a se decompor."}
+    ]},
+    {q:"Vai comprar um produto. Qual você prefere?", o:[
+      {t:"Comprar produto sem embalagem", q:2, fb:"Comprar a granel evita embalagens que viram lixo em minutos."},
+      {t:"Escolher embalagem de papelão", q:1, fb:"Papelão é reciclável, melhor que plástico, mas ainda é descarte."},
+      {t:"Preferir muito plástico embalado", q:0, fb:"Excesso de embalagem plástica multiplica o lixo de uso único."}
+    ]},
+    {q:"Lixo em casa. Como você separa?", o:[
+      {t:"Separar recicláveis e orgânicos", q:2, fb:"Separar corretamente permite reciclagem e compostagem dos resíduos."},
+      {t:"Separar só as latinhas", q:1, fb:"Separar latas já ajuda, mas muito reciclável ainda se perde."},
+      {t:"Misturar tudo no saco", q:0, fb:"Lixo misturado contamina recicláveis e vai todo para o aterro."}
+    ]},
+    {q:"Para ir à escola perto, você escolhe:", o:[
+      {t:"Ir andando ou pedalando", q:2, fb:"Andar a pé ou de bike não emite carbono e faz bem à saúde."},
+      {t:"Pegar o transporte coletivo", q:1, fb:"Ônibus divide as emissões entre muitas pessoas, melhor que carro só."},
+      {t:"Ir de carro sozinho", q:0, fb:"Carro individual queima combustível e emite CO2 para um só trajeto."}
+    ]}
+  ]},
+
+  intermediario: { label:"Intermediário", value:5, scenes:[
+    {q:"Sua cidade quer reduzir resíduos. Primeira ação da hierarquia?", o:[
+      {t:"Reduzir consumo na origem", q:2, fb:"Na hierarquia dos resíduos, reduzir vem antes de reusar e reciclar."},
+      {t:"Reciclar todo material possível", q:1, fb:"Reciclar é importante, mas vem depois de reduzir e reutilizar."},
+      {t:"Aterrar os resíduos gerados", q:0, fb:"Aterro é a última opção, só para o que não pode ser aproveitado."}
+    ]},
+    {q:"Um produto quebra fora da garantia. A economia circular sugere:", o:[
+      {t:"Consertar e prolongar uso", q:2, fb:"Reparo mantém o produto em uso e evita extrair novos recursos."},
+      {t:"Revender o produto quebrado", q:1, fb:"Revender ainda dá utilidade, mas o conserto costuma ser melhor."},
+      {t:"Descartar e comprar outro", q:0, fb:"Descartar e recomprar segue o modelo linear de extrair e jogar fora."}
+    ]},
+    {q:"A logística reversa serve para:", o:[
+      {t:"Devolver produto ao fabricante", q:2, fb:"A logística reversa retorna pilhas, eletrônicos e embalagens ao produtor."},
+      {t:"Levar tudo ao aterro", q:1, fb:"Aterrar não é logística reversa; é destinação final do rejeito."},
+      {t:"Queimar o resíduo final", q:0, fb:"Queimar sem controle emite poluentes e desperdiça materiais."}
+    ]},
+    {q:"A reciclagem de resíduos secos no Brasil hoje é cerca de:", o:[
+      {t:"Perto de 9%", q:2, fb:"No Brasil, só cerca de 8,7% dos resíduos secos vão à reciclagem."},
+      {t:"Cerca de 45%", q:1, fb:"45% está muito acima da realidade brasileira atual."},
+      {t:"Quase 80%", q:0, fb:"80% seria excelente, mas está longe do índice nacional real."}
+    ]},
+    {q:"Comprar eletrônicos de forma circular é preferir:", o:[
+      {t:"Aparelho recondicionado com garantia", q:2, fb:"Recondicionados reaproveitam aparelhos e reduzem lixo eletrônico."},
+      {t:"Lançamento mais caro possível", q:1, fb:"Comprar sempre o lançamento acelera a troca e o descarte."},
+      {t:"Modelo descartável mais barato", q:0, fb:"Produtos descartáveis têm vida curta e viram resíduo logo."}
+    ]},
+    {q:"A compostagem doméstica dos restos orgânicos:", o:[
+      {t:"Vira adubo para plantas", q:2, fb:"A compostagem transforma orgânicos em adubo e evita emissão de metano."},
+      {t:"Deve ir ao aterro", q:1, fb:"Mandar orgânico ao aterro gera chorume e metano desnecessários."},
+      {t:"Precisa ser incinerada", q:0, fb:"Incinerar orgânico úmido gasta energia e desperdiça nutrientes."}
+    ]},
+    {q:"A obsolescência programada é quando o produto:", o:[
+      {t:"Dura pouco de propósito", q:2, fb:"A obsolescência programada encurta a vida útil para forçar a recompra."},
+      {t:"Dura muito mais tempo", q:1, fb:"Durar mais é o oposto da obsolescência programada."},
+      {t:"Nunca precisa reparo", q:0, fb:"Todo produto pode falhar; nenhum dispensa reparo para sempre."}
+    ]},
+    {q:"A economia circular busca principalmente:", o:[
+      {t:"Manter recursos em uso", q:2, fb:"O ciclo fechado mantém materiais circulando e reduz extração nova."},
+      {t:"Extrair sempre mais matéria", q:1, fb:"Extrair sempre mais é a lógica linear, não a circular."},
+      {t:"Produzir e descartar rápido", q:0, fb:"Produzir e descartar rápido gera desperdício e poluição."}
+    ]},
+    {q:"Um selo ambiental confiável ajuda a:", o:[
+      {t:"Identificar produção mais responsável", q:2, fb:"Selos confiáveis sinalizam origem e produção com menor impacto."},
+      {t:"Aumentar o preço final", q:1, fb:"O selo não serve para encarecer, e sim para informar o consumidor."},
+      {t:"Esconder o real impacto", q:0, fb:"Selos sérios revelam impacto; greenwashing é que tenta esconder."}
+    ]},
+    {q:"A meta da Política Nacional de Resíduos para reciclagem é:", o:[
+      {t:"Alcançar 20 por cento", q:2, fb:"A meta nacional é reciclar cerca de 20% dos resíduos gerados."},
+      {t:"Alcançar 90 por cento", q:1, fb:"90% é uma meta irreal frente ao índice atual do país."},
+      {t:"Não reciclar mais nada", q:0, fb:"A política incentiva reciclar mais, nunca abandonar a reciclagem."}
+    ]}
+  ]},
+
+  dificil: { label:"Difícil", value:4, scenes:[
+    {q:"Na hierarquia 9R, o R de maior prioridade é:", o:[
+      {t:"Refuse: recusar o consumo", q:2, fb:"No framework 9R, Refuse (R0) tem prioridade máxima sobre reciclar."},
+      {t:"Recycle: reciclar o material", q:1, fb:"Recycle (R8) está entre as últimas estratégias da hierarquia 9R."},
+      {t:"Recover: recuperar por energia", q:0, fb:"Recover (R9) por energia é o penúltimo recurso, antes do aterro."}
+    ]},
+    {q:"A taxa global de circularidade em 2023 ficou em torno de:", o:[
+      {t:"Cerca de 6,9%", q:2, fb:"A circularidade global caiu para 6,9% em 2023, segundo o Circularity Gap Report."},
+      {t:"Cerca de 25%", q:1, fb:"25% é o potencial máximo teórico, não a taxa atual medida."},
+      {t:"Cerca de 50%", q:0, fb:"50% está muito acima da circularidade global real."}
+    ]},
+    {q:"O downcycling ocorre quando o material reciclado:", o:[
+      {t:"Perde qualidade no ciclo", q:2, fb:"No downcycling o material perde qualidade, como plástico virando fibra inferior."},
+      {t:"Melhora a cada reciclagem", q:1, fb:"Ganhar qualidade seria upcycling, não downcycling."},
+      {t:"Mantém valor para sempre", q:0, fb:"Poucos materiais mantêm valor infinito; a maioria se degrada."}
+    ]},
+    {q:"O modelo 'do berço ao berço' (Cradle to Cradle) propõe que:", o:[
+      {t:"Nutrientes retornam ao ciclo", q:2, fb:"O Cradle to Cradle desenha materiais que voltam a ciclos técnicos ou biológicos."},
+      {t:"Produtos sirvam uso único", q:1, fb:"Uso único contraria totalmente a lógica do berço ao berço."},
+      {t:"Tudo termine em aterro", q:0, fb:"Aterrar tudo é o modelo linear que o C2C busca superar."}
+    ]},
+    {q:"A pegada material global anual já ultrapassou:", o:[
+      {t:"Cem bilhões de toneladas", q:2, fb:"O consumo mundial passou de 100 bilhões de toneladas de materiais por ano."},
+      {t:"Dez bilhões de toneladas", q:1, fb:"Dez bilhões subestima muito o consumo material global."},
+      {t:"Um bilhão de toneladas", q:0, fb:"Um bilhão está muitíssimo abaixo do volume real extraído."}
+    ]},
+    {q:"A simbiose industrial acontece quando uma empresa:", o:[
+      {t:"Usa resíduo de outra", q:2, fb:"Na simbiose industrial, o resíduo de uma fábrica vira insumo de outra."},
+      {t:"Descarta todo seu rejeito", q:1, fb:"Descartar todo rejeito ignora a troca típica da simbiose."},
+      {t:"Compra só matéria virgem", q:0, fb:"Usar só matéria virgem é o oposto da simbiose industrial."}
+    ]},
+    {q:"O ecodesign prioriza produtos que sejam:", o:[
+      {t:"Fáceis de reparar depois", q:2, fb:"O ecodesign facilita reparo, desmontagem e reciclagem desde o projeto."},
+      {t:"Colados e sem reparo", q:1, fb:"Produtos colados dificultam o reparo e reduzem a vida útil."},
+      {t:"Feitos para uso único", q:0, fb:"Projetar para uso único contraria a durabilidade do ecodesign."}
+    ]},
+    {q:"A logística reversa de eletroeletrônicos no Brasil é:", o:[
+      {t:"Obrigatória por lei federal", q:2, fb:"A PNRS torna a logística reversa obrigatória para setores como eletrônicos."},
+      {t:"Totalmente proibida no país", q:1, fb:"Ela não é proibida; ao contrário, é exigida por lei."},
+      {t:"Isenta para os fabricantes", q:0, fb:"Fabricantes têm responsabilidade compartilhada, não isenção."}
+    ]},
+    {q:"O greenwashing é a prática em que a empresa:", o:[
+      {t:"Finge ser mais sustentável", q:2, fb:"O greenwashing usa marketing verde sem sustentar as alegações com dados."},
+      {t:"Comprova cada dado ambiental", q:1, fb:"Comprovar dados com transparência é o contrário de greenwashing."},
+      {t:"Publica auditoria independente completa", q:0, fb:"Auditoria independente aumenta a credibilidade, não o greenwashing."}
+    ]},
+    {q:"A responsabilidade estendida do produtor (EPR) faz o fabricante:", o:[
+      {t:"Responder pelo produto pós-consumo", q:2, fb:"A EPR responsabiliza o produtor pela coleta e destino do produto usado."},
+      {t:"Ignorar o destino final", q:1, fb:"Ignorar o pós-consumo é justamente o que a EPR combate."},
+      {t:"Transferir tudo ao consumidor", q:0, fb:"A EPR compartilha responsabilidade; não a joga só no consumidor."}
+    ]},
+    {q:"A Lei 15.088/2025 no Brasil passou a:", o:[
+      {t:"Proibir importar resíduos sólidos", q:2, fb:"A Lei 15.088/2025 proíbe importar resíduos como plástico, papel e metal."},
+      {t:"Liberar importar todo lixo", q:1, fb:"A lei restringe, e não libera, a importação de resíduos."},
+      {t:"Acabar com a reciclagem", q:0, fb:"A norma fortalece a reciclagem interna, não a elimina."}
+    ]},
+    {q:"No Brasil, a destinação incorreta de resíduos atinge cerca de:", o:[
+      {t:"40% do total gerado", q:2, fb:"Cerca de 40% dos resíduos ainda vão a lixões ou aterros controlados."},
+      {t:"5% do total gerado", q:1, fb:"5% subestima muito a destinação inadequada no país."},
+      {t:"0% do total gerado", q:0, fb:"Infelizmente não é 0%; boa parte ainda tem destino incorreto."}
+    ]}
+  ]},
+
+  carbonauta: { label:"🛰️ Carbonauta", value:4, scenes:[
+    {q:"Na taxonomia de Potting et al. (2017), a estratégia R0 corresponde a:", o:[
+      {t:"Refuse: recusar a função", q:2, fb:"Em Potting et al., R0 (Refuse) evita o produto ou redesenha sua função."},
+      {t:"Recycle: reprocessar o material", q:1, fb:"Recycle situa-se em R8, muito abaixo de Refuse na hierarquia."},
+      {t:"Recover: recuperar energia térmica", q:0, fb:"Recover (R9) é a última etapa antes do descarte definitivo."}
+    ]},
+    {q:"O Circularity Gap Report 2025 apontou circularidade global de:", o:[
+      {t:"6,9%, em queda anual", q:2, fb:"O relatório de 2025 registrou 6,9%, ante 7,2% do ciclo anterior."},
+      {t:"25%, recorde histórico anual", q:1, fb:"25% é apenas o teto teórico se tudo reciclável fosse reciclado."},
+      {t:"50%, meta já atingida", q:0, fb:"50% está muito distante da circularidade global real."}
+    ]},
+    {q:"A Ellen MacArthur Foundation separa ciclos técnicos de biológicos porque:", o:[
+      {t:"Biológicos regeneram o solo", q:2, fb:"Nutrientes biológicos regeneram o solo e os técnicos recirculam na indústria."},
+      {t:"Técnicos viram sempre compostagem", q:1, fb:"Materiais técnicos não são compostáveis; circulam por reuso e reciclagem."},
+      {t:"Ambos terminam em aterro", q:0, fb:"O modelo evita o aterro; ele não é o destino previsto dos ciclos."}
+    ]},
+    {q:"O efeito rebote (Jevons) na circularidade ocorre quando a eficiência:", o:[
+      {t:"Eleva o consumo total", q:2, fb:"No efeito rebote, a eficiência barateia o uso e pode elevar o consumo absoluto."},
+      {t:"Reduz sempre o consumo", q:1, fb:"Nem sempre a eficiência reduz consumo; o rebote pode anular o ganho."},
+      {t:"Não altera a demanda", q:0, fb:"O rebote justamente altera a demanda, muitas vezes elevando-a."}
+    ]},
+    {q:"Na Análise de Ciclo de Vida (ACV), a unidade funcional serve para:", o:[
+      {t:"Padronizar a comparação de impactos", q:2, fb:"A unidade funcional garante comparação justa por serviço prestado, não por massa."},
+      {t:"Medir só o preço", q:1, fb:"A ACV avalia impactos ambientais, não apenas o preço do produto."},
+      {t:"Ignorar as fases", q:0, fb:"A ACV cobre todas as fases, do berço ao túmulo ou ao berço."}
+    ]},
+    {q:"Sobre a matéria-prima virgem, o modelo circular busca:", o:[
+      {t:"Desacoplar crescimento da extração", q:2, fb:"A circularidade desacopla o bem-estar econômico do uso de recursos virgens."},
+      {t:"Acelerar a extração mineral", q:1, fb:"Acelerar a extração aprofunda a lógica linear que se quer superar."},
+      {t:"Manter extração sempre crescente", q:0, fb:"Extração sempre crescente é insustentável frente a limites planetários."}
+    ]},
+    {q:"O alumínio é material técnico exemplar porque:", o:[
+      {t:"Recicla sem perder propriedades", q:2, fb:"O alumínio recicla quase infinitamente com cerca de 5% da energia primária."},
+      {t:"Degrada a cada reciclagem", q:1, fb:"Ao contrário de plásticos, o alumínio não sofre downcycling relevante."},
+      {t:"Só serve uso único", q:0, fb:"O alumínio é altamente reciclável, o oposto de uso único."}
+    ]},
+    {q:"A responsabilidade estendida do produtor (EPR) internaliza:", o:[
+      {t:"O custo do pós-consumo", q:2, fb:"A EPR internaliza a externalidade do descarte no custo do produtor."},
+      {t:"Apenas o lucro imediato", q:1, fb:"A EPR trata de responsabilidade ambiental, não só de lucro."},
+      {t:"Só o custo produtivo", q:0, fb:"Ela vai além da produção, cobrindo coleta e destinação final."}
+    ]},
+    {q:"O distrito de Kalundborg é referência mundial em simbiose por:", o:[
+      {t:"Trocar resíduos entre indústrias", q:2, fb:"Em Kalundborg, vapor, água e subprodutos circulam entre plantas vizinhas."},
+      {t:"Isolar cada fábrica totalmente", q:1, fb:"O modelo depende de integração, não de isolamento das fábricas."},
+      {t:"Descartar todo excedente gerado", q:0, fb:"A simbiose reaproveita excedentes em vez de descartá-los."}
+    ]},
+    {q:"O indicador MCI (Material Circularity Indicator) mede:", o:[
+      {t:"A circularidade do produto", q:2, fb:"O MCI quantifica quanto um produto usa fluxos restauradores versus lineares."},
+      {t:"Apenas o peso físico", q:1, fb:"O MCI vai além da massa; avalia origem e destino dos materiais."},
+      {t:"Somente o preço", q:0, fb:"O indicador é físico-ambiental, não uma métrica de preço."}
+    ]},
+    {q:"Frente aos limites planetários, a circularidade atua sobretudo em:", o:[
+      {t:"Uso de recursos e resíduos", q:2, fb:"Reduzir extração e resíduos alivia limites como uso de recursos e poluição."},
+      {t:"Apenas o ozônio estratosférico", q:1, fb:"A circularidade afeta bem mais que o ozônio; toca solo, água e clima."},
+      {t:"Nenhum limite relevante", q:0, fb:"A economia circular dialoga diretamente com os limites planetários."}
+    ]},
+    {q:"A diferença central entre reciclagem e economia circular é que a segunda:", o:[
+      {t:"Redesenha todo o sistema", q:2, fb:"A economia circular reprojeta produção e consumo; reciclar é só uma estratégia."},
+      {t:"Equivale à reciclagem", q:1, fb:"A reciclagem é uma tática dentro da circularidade, não o todo."},
+      {t:"Foca no descarte final", q:0, fb:"A circularidade começa no design, muito antes do descarte."}
+    ]}
+  ]}
+};
+
+/* ================= Estado ================= */
+let level = "basico";
+let scenes = [];
+let idx = 0, health = 50, good = 0, answered = false;
+let startTime = 0, timer = null, elapsed = 0;
+
+const $ = id => document.getElementById(id);
+
+function fmtTime(s){ return s + "s"; }
+
+function startTimer(){
+  startTime = Date.now(); elapsed = 0;
+  clearInterval(timer);
+  timer = setInterval(()=>{
+    elapsed = Math.floor((Date.now()-startTime)/1000);
+    $("hTime").textContent = fmtTime(elapsed);
+  }, 500);
+}
+function stopTimer(){ clearInterval(timer); }
+
+function shuffle(a){
+  for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; }
+  return a;
+}
+
+function setLevel(l){
+  level = l;
+  document.querySelectorAll(".pill").forEach(b=>b.classList.toggle("active", b.dataset.lvl===l));
+  $("rankLvl").textContent = "Nível: " + DATA[l].label;
+  reset();
+  loadRanking();
+}
+
+function reset(){
+  scenes = DATA[level].scenes;
+  idx = 0; health = 50; good = 0; answered = false;
+  $("final").classList.remove("show");
+  $("play").style.display = "";
+  $("saveMsg").textContent = "";
+  updateHUD();
+  startTimer();
+  renderScene();
+}
+
+function updateCity(outcome){
+  const box=$("cityBox"),mood=$("cityMood"),pct=$("cityPct"),life=$("cityLifeFill");
+  if(!box||!mood||!pct||!life)return;
+  const h=Math.round(health);
+  box.classList.remove("state-low","state-mid","state-high","celebrate","warning");
+  box.classList.add(h>=70?"state-high":h<40?"state-low":"state-mid");
+  mood.textContent=h>=70?"🌳 Cidade florescendo":h<40?"⚠️ Cidade em alerta":"🌱 Cidade em equilíbrio";
+  pct.textContent=h+"%";life.style.width=h+"%";
+  if(outcome===true||outcome===false){
+    void box.offsetWidth;
+    box.classList.add(outcome?"celebrate":"warning");
+  }
+}
+function updateHUD(){
+  $("hScene").textContent = (idx+1) + "/" + scenes.length;
+  $("hGood").textContent = good;
+  const h = Math.round(health);
+  $("hHealth").textContent = h + "%";
+  $("ecoTxt").textContent = h + "%";
+  $("ecoFill").style.width = h + "%";
+  $("ecoFill").style.background = h<40 ? "var(--bad)" : (h<70 ? "var(--gold)" : "var(--good)");
+  $("prog").style.width = Math.round((idx/scenes.length)*100) + "%";
+  updateCity();
+}
+
+function renderScene(){
+  answered = false;
+  const sc = scenes[idx];
+  $("scene").textContent = "Cena " + (idx+1) + ": " + sc.q;
+  $("fb").classList.remove("show");
+  $("next").classList.remove("show");
+  const opts = $("opts"); opts.innerHTML = "";
+  const order = shuffle(sc.o.map((o,i)=>i));
+  order.forEach(i=>{
+    const o = sc.o[i];
+    const btn = document.createElement("button");
+    btn.className = "opt";
+    btn.textContent = o.t;
+    btn.onclick = ()=>choose(i, btn);
+    opts.appendChild(btn);
+  });
+  updateHUD();
+}
+
+function choose(i, btn){
+  if(answered) return;
+  answered = true;
+  const sc = scenes[idx];
+  const o = sc.o[i];
+  const V = DATA[level].value;
+  let delta = 0;
+  if(o.q===2){ delta = V; good++; }
+  else if(o.q===1){ delta = 0; }
+  else { delta = -V; }
+  health = Math.max(0, Math.min(100, health + delta));
+
+  document.querySelectorAll(".opt").forEach(b=>{
+    b.disabled = true;
+    if(b===btn){ b.classList.add(o.q===2 ? "correct" : "wrong"); }
+    else b.classList.add("dim");
+  });
+
+  const sign = delta>0 ? ("+"+delta) : (delta<0 ? (""+delta) : "0");
+  const cls = delta>0 ? "var(--good)" : (delta<0 ? "var(--bad)" : "var(--muted)");
+  $("fb").innerHTML = (delta>0?"💚 A cidade respira melhor! ":delta<0?"💔 A cidade sentiu essa decisão. ":"🟡 Você manteve o equilíbrio. ") + esc(o.fb) + ' <span class="impact" style="color:'+cls+'">Ecossistema: '+sign+' pontos.</span>';
+  $("fb").classList.add("show");
+  $("next").textContent = (idx < scenes.length-1) ? "Próxima cena →" : "Ver resultado 🎉";
+  $("next").classList.add("show");
+  updateHUD();
+  updateCity(delta>0?true:delta<0?false:null);
+}
+
+$("next").onclick = ()=>{
+  if(idx < scenes.length-1){ idx++; renderScene(); }
+  else finish();
+};
+
+function finish(){
+  stopTimer();
+  $("prog").style.width = "100%";
+  const score = Math.round(health);
+  let emoji, verdict;
+  if(score>=85){ emoji="🌍✨"; verdict="Cidade Circular! Você fechou os ciclos com maestria."; }
+  else if(score>=60){ emoji="🌱"; verdict="No caminho certo — a cidade avança para a circularidade."; }
+  else if(score>=40){ emoji="⚠️"; verdict="Ainda linear: bom começo, mas há muito desperdício a evitar."; }
+  else { emoji="🚨"; verdict="Alerta de desperdício! Reveja as decisões e feche os ciclos."; }
+  $("finEmoji").textContent = emoji;
+  $("finVerdict").textContent = verdict;
+  $("finResume").innerHTML = "Índice final: <b>"+score+"%</b> · Boas escolhas: <b>"+good+"/"+scenes.length+"</b> · Tempo: <b>"+elapsed+"s</b>";
+  $("play").style.display = "none";
+  $("final").classList.add("show");
+}
+
+$("replay").onclick = reset;
+
+/* ================= Ranking ================= */
+function esc(s){ return String(s).replace(/[&<>"']/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c])); }
+
+$("saveBtn").onclick = async ()=>{
+  const name = ($("nameIn").value || "").trim().slice(0,20);
+  if(!name){ $("saveMsg").textContent = "Digite um nome para salvar."; return; }
+  const score = Math.round(health);
+  if(!fb.ok){ $("saveMsg").textContent = "Sem conexão com o ranking agora — seu resultado: "+score+"%."; return; }
+  try{
+    const { collection, addDoc, serverTimestamp } = fb.mod;
+    await addDoc(collection(fb.db, "games", GAME_ID, "scores"), {
+      name: name, level: level, score: score, seconds: elapsed, ts: serverTimestamp()
+    });
+    $("saveMsg").textContent = "✅ Salvo no ranking!";
+    loadRanking();
+  }catch(e){ $("saveMsg").textContent = "Não foi possível salvar agora. Tente mais tarde."; }
+};
+
+async function loadRanking(){
+  const box = $("rankBox");
+  if(!fb.ok){ box.innerHTML = '<div class="rankmsg">⚠️ Ranking offline. O jogo funciona normalmente.</div>'; return; }
+  box.innerHTML = '<div class="rankmsg">Carregando ranking…</div>';
+  try{
+    const { collection, query, orderBy, limit, getDocs } = fb.mod;
+    const q = query(collection(fb.db, "games", GAME_ID, "scores"), orderBy("score","desc"), limit(100));
+    const snap = await getDocs(q);
+    let rows = [];
+    snap.forEach(d=>{ const v=d.data(); if(v.level===level) rows.push(v); });
+    rows.sort((a,b)=> (b.score-a.score) || (a.seconds-b.seconds));
+    rows = rows.slice(0,10);
+    if(!rows.length){ box.innerHTML = '<div class="rankmsg">Ainda sem pontuações neste nível. Seja o primeiro! 🌱</div>'; return; }
+    let html = '<table class="rk"><thead><tr><th>#</th><th>Nome</th><th>Tempo</th><th style="text-align:right">Índice</th></tr></thead><tbody>';
+    rows.forEach((r,i)=>{
+      html += '<tr><td class="pos">'+(i+1)+'</td><td>'+esc(r.name)+'</td><td>'+(r.seconds!=null?r.seconds+'s':'—')+'</td><td class="sc">'+r.score+'%</td></tr>';
+    });
+    html += '</tbody></table>';
+    box.innerHTML = html;
+  }catch(e){ box.innerHTML = '<div class="rankmsg">Não foi possível carregar o ranking agora.</div>'; }
+}
+
+/* ================= Início ================= */
+document.querySelectorAll(".pill").forEach(b=> b.onclick = ()=> setLevel(b.dataset.lvl));
+(async ()=>{
+  await initFirebase();
+  setLevel("basico");
+})();
+</script>
+</body>
+</html>
