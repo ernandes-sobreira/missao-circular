@@ -416,42 +416,42 @@ const DATA = {
     ]},
     {q:"A logística reversa serve para:", o:[
       {t:"Devolver produto ao fabricante", q:2, fb:"A logística reversa retorna pilhas, eletrônicos e embalagens ao produtor."},
-      {t:"Levar tudo ao aterro", q:1, fb:"Aterrar não é logística reversa; é destinação final do rejeito."},
+      {t:"Levar tudo ao aterro", q:0, fb:"Aterrar não é logística reversa; é destinação final do rejeito."},
       {t:"Queimar o resíduo final", q:0, fb:"Queimar sem controle emite poluentes e desperdiça materiais."}
     ]},
-    {q:"A reciclagem de resíduos secos no Brasil hoje é cerca de:", o:[
-      {t:"Perto de 9%", q:2, fb:"No Brasil, só cerca de 8,7% dos resíduos secos vão à reciclagem."},
-      {t:"Cerca de 45%", q:1, fb:"45% está muito acima da realidade brasileira atual."},
+    {q:"A reciclagem mecânica do lixo urbano no Brasil hoje é cerca de:", o:[
+      {t:"Perto de 9%", q:2, fb:"Segundo a Abrema, só cerca de 8,7% do lixo urbano vai à reciclagem mecânica."},
+      {t:"Cerca de 45%", q:0, fb:"45% está muito acima da realidade brasileira atual."},
       {t:"Quase 80%", q:0, fb:"80% seria excelente, mas está longe do índice nacional real."}
     ]},
     {q:"Comprar eletrônicos de forma circular é preferir:", o:[
       {t:"Aparelho recondicionado com garantia", q:2, fb:"Recondicionados reaproveitam aparelhos e reduzem lixo eletrônico."},
-      {t:"Lançamento mais caro possível", q:1, fb:"Comprar sempre o lançamento acelera a troca e o descarte."},
+      {t:"Lançamento mais caro possível", q:0, fb:"Comprar sempre o lançamento acelera a troca e o descarte."},
       {t:"Modelo descartável mais barato", q:0, fb:"Produtos descartáveis têm vida curta e viram resíduo logo."}
     ]},
     {q:"A compostagem doméstica dos restos orgânicos:", o:[
       {t:"Vira adubo para plantas", q:2, fb:"A compostagem transforma orgânicos em adubo e evita emissão de metano."},
-      {t:"Deve ir ao aterro", q:1, fb:"Mandar orgânico ao aterro gera chorume e metano desnecessários."},
+      {t:"Deve ir ao aterro", q:0, fb:"Mandar orgânico ao aterro gera chorume e metano desnecessários."},
       {t:"Precisa ser incinerada", q:0, fb:"Incinerar orgânico úmido gasta energia e desperdiça nutrientes."}
     ]},
     {q:"A obsolescência programada é quando o produto:", o:[
       {t:"Dura pouco de propósito", q:2, fb:"A obsolescência programada encurta a vida útil para forçar a recompra."},
-      {t:"Dura muito mais tempo", q:1, fb:"Durar mais é o oposto da obsolescência programada."},
+      {t:"Dura muito mais tempo", q:0, fb:"Durar mais é o oposto da obsolescência programada."},
       {t:"Nunca precisa reparo", q:0, fb:"Todo produto pode falhar; nenhum dispensa reparo para sempre."}
     ]},
     {q:"A economia circular busca principalmente:", o:[
       {t:"Manter recursos em uso", q:2, fb:"O ciclo fechado mantém materiais circulando e reduz extração nova."},
-      {t:"Extrair sempre mais matéria", q:1, fb:"Extrair sempre mais é a lógica linear, não a circular."},
+      {t:"Extrair sempre mais matéria", q:0, fb:"Extrair sempre mais é a lógica linear, não a circular."},
       {t:"Produzir e descartar rápido", q:0, fb:"Produzir e descartar rápido gera desperdício e poluição."}
     ]},
     {q:"Um selo ambiental confiável ajuda a:", o:[
       {t:"Identificar produção mais responsável", q:2, fb:"Selos confiáveis sinalizam origem e produção com menor impacto."},
-      {t:"Aumentar o preço final", q:1, fb:"O selo não serve para encarecer, e sim para informar o consumidor."},
+      {t:"Aumentar o preço final", q:0, fb:"O selo não serve para encarecer, e sim para informar o consumidor."},
       {t:"Esconder o real impacto", q:0, fb:"Selos sérios revelam impacto; greenwashing é que tenta esconder."}
     ]},
-    {q:"A meta da Política Nacional de Resíduos para reciclagem é:", o:[
-      {t:"Alcançar 20 por cento", q:2, fb:"A meta nacional é reciclar cerca de 20% dos resíduos gerados."},
-      {t:"Alcançar 90 por cento", q:1, fb:"90% é uma meta irreal frente ao índice atual do país."},
+    {q:"Até 2040, o Plano Nacional de Resíduos Sólidos prevê reciclar dos resíduos secos:", o:[
+      {t:"Alcançar 20 por cento", q:2, fb:"O Planares prevê reciclar cerca de 20% dos resíduos secos até 2040."},
+      {t:"Alcançar 90 por cento", q:0, fb:"90% é uma meta irreal frente ao índice atual do país."},
       {t:"Não reciclar mais nada", q:0, fb:"A política incentiva reciclar mais, nunca abandonar a reciclagem."}
     ]}
   ]},
@@ -462,59 +462,59 @@ const DATA = {
       {t:"Recycle: reciclar o material", q:1, fb:"Recycle (R8) está entre as últimas estratégias da hierarquia 9R."},
       {t:"Recover: recuperar por energia", q:0, fb:"Recover (R9) por energia é o penúltimo recurso, antes do aterro."}
     ]},
-    {q:"A taxa global de circularidade em 2023 ficou em torno de:", o:[
-      {t:"Cerca de 6,9%", q:2, fb:"A circularidade global caiu para 6,9% em 2023, segundo o Circularity Gap Report."},
-      {t:"Cerca de 25%", q:1, fb:"25% é o potencial máximo teórico, não a taxa atual medida."},
+    {q:"Segundo o Circularity Gap Report 2025, a circularidade global ficou em torno de:", o:[
+      {t:"Cerca de 6,9%", q:2, fb:"O relatório de 2025 mediu 6,9%, com dados de 2021: só essa fração dos materiais era reciclada."},
+      {t:"Cerca de 25%", q:0, fb:"25% é o potencial máximo teórico, não a taxa atual medida."},
       {t:"Cerca de 50%", q:0, fb:"50% está muito acima da circularidade global real."}
     ]},
     {q:"O downcycling ocorre quando o material reciclado:", o:[
       {t:"Perde qualidade no ciclo", q:2, fb:"No downcycling o material perde qualidade, como plástico virando fibra inferior."},
-      {t:"Melhora a cada reciclagem", q:1, fb:"Ganhar qualidade seria upcycling, não downcycling."},
+      {t:"Melhora a cada reciclagem", q:0, fb:"Ganhar qualidade seria upcycling, não downcycling."},
       {t:"Mantém valor para sempre", q:0, fb:"Poucos materiais mantêm valor infinito; a maioria se degrada."}
     ]},
     {q:"O modelo 'do berço ao berço' (Cradle to Cradle) propõe que:", o:[
       {t:"Nutrientes retornam ao ciclo", q:2, fb:"O Cradle to Cradle desenha materiais que voltam a ciclos técnicos ou biológicos."},
-      {t:"Produtos sirvam uso único", q:1, fb:"Uso único contraria totalmente a lógica do berço ao berço."},
+      {t:"Produtos sirvam uso único", q:0, fb:"Uso único contraria totalmente a lógica do berço ao berço."},
       {t:"Tudo termine em aterro", q:0, fb:"Aterrar tudo é o modelo linear que o C2C busca superar."}
     ]},
     {q:"A pegada material global anual já ultrapassou:", o:[
       {t:"Cem bilhões de toneladas", q:2, fb:"O consumo mundial passou de 100 bilhões de toneladas de materiais por ano."},
-      {t:"Dez bilhões de toneladas", q:1, fb:"Dez bilhões subestima muito o consumo material global."},
+      {t:"Dez bilhões de toneladas", q:0, fb:"Dez bilhões subestima muito o consumo material global."},
       {t:"Um bilhão de toneladas", q:0, fb:"Um bilhão está muitíssimo abaixo do volume real extraído."}
     ]},
     {q:"A simbiose industrial acontece quando uma empresa:", o:[
       {t:"Usa resíduo de outra", q:2, fb:"Na simbiose industrial, o resíduo de uma fábrica vira insumo de outra."},
-      {t:"Descarta todo seu rejeito", q:1, fb:"Descartar todo rejeito ignora a troca típica da simbiose."},
+      {t:"Descarta todo seu rejeito", q:0, fb:"Descartar todo rejeito ignora a troca típica da simbiose."},
       {t:"Compra só matéria virgem", q:0, fb:"Usar só matéria virgem é o oposto da simbiose industrial."}
     ]},
     {q:"O ecodesign prioriza produtos que sejam:", o:[
       {t:"Fáceis de reparar depois", q:2, fb:"O ecodesign facilita reparo, desmontagem e reciclagem desde o projeto."},
-      {t:"Colados e sem reparo", q:1, fb:"Produtos colados dificultam o reparo e reduzem a vida útil."},
+      {t:"Colados e sem reparo", q:0, fb:"Produtos colados dificultam o reparo e reduzem a vida útil."},
       {t:"Feitos para uso único", q:0, fb:"Projetar para uso único contraria a durabilidade do ecodesign."}
     ]},
     {q:"A logística reversa de eletroeletrônicos no Brasil é:", o:[
       {t:"Obrigatória por lei federal", q:2, fb:"A PNRS torna a logística reversa obrigatória para setores como eletrônicos."},
-      {t:"Totalmente proibida no país", q:1, fb:"Ela não é proibida; ao contrário, é exigida por lei."},
+      {t:"Totalmente proibida no país", q:0, fb:"Ela não é proibida; ao contrário, é exigida por lei."},
       {t:"Isenta para os fabricantes", q:0, fb:"Fabricantes têm responsabilidade compartilhada, não isenção."}
     ]},
     {q:"O greenwashing é a prática em que a empresa:", o:[
       {t:"Finge ser mais sustentável", q:2, fb:"O greenwashing usa marketing verde sem sustentar as alegações com dados."},
-      {t:"Comprova cada dado ambiental", q:1, fb:"Comprovar dados com transparência é o contrário de greenwashing."},
+      {t:"Comprova cada dado ambiental", q:0, fb:"Comprovar dados com transparência é o contrário de greenwashing."},
       {t:"Publica auditoria independente completa", q:0, fb:"Auditoria independente aumenta a credibilidade, não o greenwashing."}
     ]},
     {q:"A responsabilidade estendida do produtor (EPR) faz o fabricante:", o:[
       {t:"Responder pelo produto pós-consumo", q:2, fb:"A EPR responsabiliza o produtor pela coleta e destino do produto usado."},
-      {t:"Ignorar o destino final", q:1, fb:"Ignorar o pós-consumo é justamente o que a EPR combate."},
+      {t:"Ignorar o destino final", q:0, fb:"Ignorar o pós-consumo é justamente o que a EPR combate."},
       {t:"Transferir tudo ao consumidor", q:0, fb:"A EPR compartilha responsabilidade; não a joga só no consumidor."}
     ]},
     {q:"A Lei 15.088/2025 no Brasil passou a:", o:[
       {t:"Proibir importar resíduos sólidos", q:2, fb:"A Lei 15.088/2025 proíbe importar resíduos como plástico, papel e metal."},
-      {t:"Liberar importar todo lixo", q:1, fb:"A lei restringe, e não libera, a importação de resíduos."},
+      {t:"Liberar importar todo lixo", q:0, fb:"A lei restringe, e não libera, a importação de resíduos."},
       {t:"Acabar com a reciclagem", q:0, fb:"A norma fortalece a reciclagem interna, não a elimina."}
     ]},
     {q:"No Brasil, a destinação incorreta de resíduos atinge cerca de:", o:[
       {t:"40% do total gerado", q:2, fb:"Cerca de 40% dos resíduos ainda vão a lixões ou aterros controlados."},
-      {t:"5% do total gerado", q:1, fb:"5% subestima muito a destinação inadequada no país."},
+      {t:"5% do total gerado", q:0, fb:"5% subestima muito a destinação inadequada no país."},
       {t:"0% do total gerado", q:0, fb:"Infelizmente não é 0%; boa parte ainda tem destino incorreto."}
     ]}
   ]},
@@ -527,57 +527,57 @@ const DATA = {
     ]},
     {q:"O Circularity Gap Report 2025 apontou circularidade global de:", o:[
       {t:"6,9%, em queda anual", q:2, fb:"O relatório de 2025 registrou 6,9%, ante 7,2% do ciclo anterior."},
-      {t:"25%, recorde histórico anual", q:1, fb:"25% é apenas o teto teórico se tudo reciclável fosse reciclado."},
+      {t:"25%, recorde histórico anual", q:0, fb:"25% é apenas o teto teórico se tudo reciclável fosse reciclado."},
       {t:"50%, meta já atingida", q:0, fb:"50% está muito distante da circularidade global real."}
     ]},
     {q:"A Ellen MacArthur Foundation separa ciclos técnicos de biológicos porque:", o:[
       {t:"Biológicos regeneram o solo", q:2, fb:"Nutrientes biológicos regeneram o solo e os técnicos recirculam na indústria."},
-      {t:"Técnicos viram sempre compostagem", q:1, fb:"Materiais técnicos não são compostáveis; circulam por reuso e reciclagem."},
+      {t:"Técnicos viram sempre compostagem", q:0, fb:"Materiais técnicos não são compostáveis; circulam por reuso e reciclagem."},
       {t:"Ambos terminam em aterro", q:0, fb:"O modelo evita o aterro; ele não é o destino previsto dos ciclos."}
     ]},
     {q:"O efeito rebote (Jevons) na circularidade ocorre quando a eficiência:", o:[
       {t:"Eleva o consumo total", q:2, fb:"No efeito rebote, a eficiência barateia o uso e pode elevar o consumo absoluto."},
-      {t:"Reduz sempre o consumo", q:1, fb:"Nem sempre a eficiência reduz consumo; o rebote pode anular o ganho."},
+      {t:"Reduz sempre o consumo", q:0, fb:"Nem sempre a eficiência reduz consumo; o rebote pode anular o ganho."},
       {t:"Não altera a demanda", q:0, fb:"O rebote justamente altera a demanda, muitas vezes elevando-a."}
     ]},
     {q:"Na Análise de Ciclo de Vida (ACV), a unidade funcional serve para:", o:[
       {t:"Padronizar a comparação de impactos", q:2, fb:"A unidade funcional garante comparação justa por serviço prestado, não por massa."},
-      {t:"Medir só o preço", q:1, fb:"A ACV avalia impactos ambientais, não apenas o preço do produto."},
+      {t:"Medir só o preço", q:0, fb:"A ACV avalia impactos ambientais, não apenas o preço do produto."},
       {t:"Ignorar as fases", q:0, fb:"A ACV cobre todas as fases, do berço ao túmulo ou ao berço."}
     ]},
     {q:"Sobre a matéria-prima virgem, o modelo circular busca:", o:[
       {t:"Desacoplar crescimento da extração", q:2, fb:"A circularidade desacopla o bem-estar econômico do uso de recursos virgens."},
-      {t:"Acelerar a extração mineral", q:1, fb:"Acelerar a extração aprofunda a lógica linear que se quer superar."},
+      {t:"Acelerar a extração mineral", q:0, fb:"Acelerar a extração aprofunda a lógica linear que se quer superar."},
       {t:"Manter extração sempre crescente", q:0, fb:"Extração sempre crescente é insustentável frente a limites planetários."}
     ]},
     {q:"O alumínio é material técnico exemplar porque:", o:[
       {t:"Recicla sem perder propriedades", q:2, fb:"O alumínio recicla quase infinitamente com cerca de 5% da energia primária."},
-      {t:"Degrada a cada reciclagem", q:1, fb:"Ao contrário de plásticos, o alumínio não sofre downcycling relevante."},
+      {t:"Degrada a cada reciclagem", q:0, fb:"Ao contrário de plásticos, o alumínio não sofre downcycling relevante."},
       {t:"Só serve uso único", q:0, fb:"O alumínio é altamente reciclável, o oposto de uso único."}
     ]},
     {q:"A responsabilidade estendida do produtor (EPR) internaliza:", o:[
       {t:"O custo do pós-consumo", q:2, fb:"A EPR internaliza a externalidade do descarte no custo do produtor."},
-      {t:"Apenas o lucro imediato", q:1, fb:"A EPR trata de responsabilidade ambiental, não só de lucro."},
+      {t:"Apenas o lucro imediato", q:0, fb:"A EPR trata de responsabilidade ambiental, não só de lucro."},
       {t:"Só o custo produtivo", q:0, fb:"Ela vai além da produção, cobrindo coleta e destinação final."}
     ]},
     {q:"O distrito de Kalundborg é referência mundial em simbiose por:", o:[
       {t:"Trocar resíduos entre indústrias", q:2, fb:"Em Kalundborg, vapor, água e subprodutos circulam entre plantas vizinhas."},
-      {t:"Isolar cada fábrica totalmente", q:1, fb:"O modelo depende de integração, não de isolamento das fábricas."},
+      {t:"Isolar cada fábrica totalmente", q:0, fb:"O modelo depende de integração, não de isolamento das fábricas."},
       {t:"Descartar todo excedente gerado", q:0, fb:"A simbiose reaproveita excedentes em vez de descartá-los."}
     ]},
     {q:"O indicador MCI (Material Circularity Indicator) mede:", o:[
       {t:"A circularidade do produto", q:2, fb:"O MCI quantifica quanto um produto usa fluxos restauradores versus lineares."},
-      {t:"Apenas o peso físico", q:1, fb:"O MCI vai além da massa; avalia origem e destino dos materiais."},
+      {t:"Apenas o peso físico", q:0, fb:"O MCI vai além da massa; avalia origem e destino dos materiais."},
       {t:"Somente o preço", q:0, fb:"O indicador é físico-ambiental, não uma métrica de preço."}
     ]},
     {q:"Frente aos limites planetários, a circularidade atua sobretudo em:", o:[
       {t:"Uso de recursos e resíduos", q:2, fb:"Reduzir extração e resíduos alivia limites como uso de recursos e poluição."},
-      {t:"Apenas o ozônio estratosférico", q:1, fb:"A circularidade afeta bem mais que o ozônio; toca solo, água e clima."},
+      {t:"Apenas o ozônio estratosférico", q:0, fb:"A circularidade afeta bem mais que o ozônio; toca solo, água e clima."},
       {t:"Nenhum limite relevante", q:0, fb:"A economia circular dialoga diretamente com os limites planetários."}
     ]},
     {q:"A diferença central entre reciclagem e economia circular é que a segunda:", o:[
       {t:"Redesenha todo o sistema", q:2, fb:"A economia circular reprojeta produção e consumo; reciclar é só uma estratégia."},
-      {t:"Equivale à reciclagem", q:1, fb:"A reciclagem é uma tática dentro da circularidade, não o todo."},
+      {t:"Equivale à reciclagem", q:0, fb:"A reciclagem é uma tática dentro da circularidade, não o todo."},
       {t:"Foca no descarte final", q:0, fb:"A circularidade começa no design, muito antes do descarte."}
     ]}
   ]}
